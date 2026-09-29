@@ -11,3 +11,129 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum EstadoWeb{
+  PENDIENTE
+  PAGADO
+  EN_CAMINO
+  ENTREGADO
+  CANCELADO
+}
+
+enum Role {
+  ADMIN
+  CAJERO
+  CLIENTEWEB
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  nombre String 
+  apellido String
+  email String
+  direccion String?
+  role Role @default(CLIENTEWEB)
+  creadoEn DateTime @default(now())
+  venta Ventas[]
+  ventaWeb VentasWeb[]
+  compras Compras[]
+
+  @@map("users")
+}
+
+model Articulos{
+  id Int @id @default(autoincrement())
+  nombre String
+  categoria String
+  descripcion String?
+  stock Int
+  precioVenta Decimal @db.Decimal(10,2) @map("precio_venta")
+  precioCompra Decimal @db.Decimal(10,2) @map("precio_compra")
+  detallesventas DetallesVenta[]
+  detallesventasweb DetallesVentaWeb[]
+
+  @@map("articulos")
+}
+
+model Ventas{
+  id Int @id @default(autoincrement())
+  fecha DateTime @default(now())
+  total Decimal @db.Decimal(10,2)
+  id_usuario Int 
+  detallesVenta DetallesVenta[]
+  usuario User @relation(fields:[id_usuario],references: [id])
+
+  @@map("ventas")
+}
+
+model DetallesVenta{
+  id Int @id @default(autoincrement())
+  cantidadArticulos Int @map("cantidad_articulos")
+  subtotal Decimal @db.Decimal(10,2)
+  id_venta Int
+  id_articulo Int
+  venta Ventas @relation(fields: [id_venta],references: [id])
+  articulo Articulos @relation(fields: [id_articulo], references: [id])
+
+  @@map("detalles_venta")
+}
+
+model VentasWeb{
+  id Int @id @default(autoincrement())
+  fecha DateTime @default(now())
+  total Decimal @db.Decimal(10,2)
+  estado EstadoWeb
+  id_usuario Int
+  detallesventaweb DetallesVentaWeb[]
+
+  usuario User @relation(fields:[id_usuario],references: [id])
+
+  @@map("ventas_web")
+}
+
+model DetallesVentaWeb{
+  id Int @id @default(autoincrement())
+  cantidadArticulos Int @map("cantidad_articulos")
+  subtotal Decimal @db.Decimal(10,2)
+  id_ventaweb Int
+  id_articulo Int
+  ventasweb VentasWeb @relation(fields: [id_ventaweb],references: [id])
+  articulo Articulos @relation(fields: [id_articulo], references: [id])
+
+  @@map("detalles_venta_web")
+}
+
+model Proveedores{
+  id Int @id @default(autoincrement())
+  nombre String
+  email String
+  telefono String
+  compra Compras[]
+
+  @@map("proveedores")
+}
+
+model Compras{
+  id Int @id @default(autoincrement())
+  fecha DateTime @default(now())
+  total Decimal @db.Decimal(10,2)
+  id_proveedor Int
+  id_usuario Int
+  detallescompra DetallesCompra[]
+
+  proveedores Proveedores @relation(fields: [id_proveedor],references: [id])
+  usuarios User @relation(fields: [id_usuario],references: [id])
+
+  @@map("compras")
+}
+
+model DetallesCompra{
+  id Int @id @default(autoincrement())
+  cantidadArticulos Int @map("cantidad_articulos")
+  subtotal Decimal @db.Decimal(10,2)
+  id_compra Int
+
+  compras Compras @relation(fields: [id_compra],references: [id])
+
+  @@map("detalles_compra")
+}
