@@ -12,12 +12,24 @@ datasource db {
   provider = "postgresql"
 }
 
-enum EstadoWeb{
+enum EstadoVenta {
+  COMPLETADA
+  CANCELADA
+  DEVUELTA
+  DEVUELTA_PARCIAL
+}
+enum EstadoWeb {
   PENDIENTE
   PAGADO
   EN_CAMINO
   ENTREGADO
   CANCELADO
+}
+
+enum Pagos {
+  EFECTIVO
+  TRAJETA
+  TRANSFERENCIAQR
 }
 
 enum Role {
@@ -30,7 +42,8 @@ model User {
   id Int @id @default(autoincrement())
   nombre String 
   apellido String
-  email String
+  email String @unique
+  password String
   direccion String?
   role Role @default(CLIENTEWEB)
   creadoEn DateTime @default(now())
@@ -41,44 +54,59 @@ model User {
   @@map("users")
 }
 
-model Articulos{
+model Articulos {
   id Int @id @default(autoincrement())
-  nombre String
-  categoria String
+  nombre String @unique
+  id_categoria Int
   descripcion String?
   stock Int
   precioVenta Decimal @db.Decimal(10,2) @map("precio_venta")
   precioCompra Decimal @db.Decimal(10,2) @map("precio_compra")
   detallesventas DetallesVenta[]
   detallesventasweb DetallesVentaWeb[]
-
+  categoria    Categorias @relation(fields: [id_categoria], references: [id])
+  creadoEn DateTime @default(now())
   @@map("articulos")
 }
 
-model Ventas{
+model Categorias {
+  id        Int        @id @default(autoincrement())
+  nombre    String     @unique
+  articulos Articulos[]
+  creadoEn DateTime @default(now())
+
+  @@map("categorias")
+}
+
+
+model Ventas {
   id Int @id @default(autoincrement())
   fecha DateTime @default(now())
   total Decimal @db.Decimal(10,2)
   id_usuario Int 
+  tipo_pago Pagos
   detallesVenta DetallesVenta[]
   usuario User @relation(fields:[id_usuario],references: [id])
-
+  estado EstadoVenta @default(COMPLETADA)
+  devolucion Devoluciones[]
   @@map("ventas")
 }
 
-model DetallesVenta{
+model DetallesVenta {
   id Int @id @default(autoincrement())
   cantidadArticulos Int @map("cantidad_articulos")
   subtotal Decimal @db.Decimal(10,2)
   id_venta Int
   id_articulo Int
+  cantidadDevuelta Int @default(0) @map("cantidad_devuelta")
+  detallesDevolucion DetallesDevolucion[]
   venta Ventas @relation(fields: [id_venta],references: [id])
   articulo Articulos @relation(fields: [id_articulo], references: [id])
 
   @@map("detalles_venta")
 }
 
-model VentasWeb{
+model VentasWeb {
   id Int @id @default(autoincrement())
   fecha DateTime @default(now())
   total Decimal @db.Decimal(10,2)
@@ -91,7 +119,7 @@ model VentasWeb{
   @@map("ventas_web")
 }
 
-model DetallesVentaWeb{
+model DetallesVentaWeb {
   id Int @id @default(autoincrement())
   cantidadArticulos Int @map("cantidad_articulos")
   subtotal Decimal @db.Decimal(10,2)
@@ -103,7 +131,30 @@ model DetallesVentaWeb{
   @@map("detalles_venta_web")
 }
 
-model Proveedores{
+model Devoluciones {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime @default(now())
+  total       Decimal  @db.Decimal(10,2)
+  id_venta    Int
+  venta Ventas @relation(fields: [id_venta],references: [id])
+  detalles DetallesDevolucion[]
+
+  @@map("devoluciones")
+}
+
+model DetallesDevolucion {
+  id Int      @id @default(autoincrement())
+  cantidad Int
+  subtotal Decimal  @db.Decimal(10,2)
+  id_devolucion Int
+  id_detalle_venta Int
+  devolucion Devoluciones @relation(fields: [id_devolucion],references: [id])
+  detalleVenta DetallesVenta @relation(fields: [id_detalle_venta],references: [id])
+
+  @@map("detalles_devolucion")
+}
+
+model Proveedores {
   id Int @id @default(autoincrement())
   nombre String
   email String
@@ -113,10 +164,11 @@ model Proveedores{
   @@map("proveedores")
 }
 
-model Compras{
+model Compras {
   id Int @id @default(autoincrement())
   fecha DateTime @default(now())
   total Decimal @db.Decimal(10,2)
+  tipo_pago Pagos
   id_proveedor Int
   id_usuario Int
   detallescompra DetallesCompra[]
@@ -127,7 +179,7 @@ model Compras{
   @@map("compras")
 }
 
-model DetallesCompra{
+model DetallesCompra {
   id Int @id @default(autoincrement())
   cantidadArticulos Int @map("cantidad_articulos")
   subtotal Decimal @db.Decimal(10,2)
