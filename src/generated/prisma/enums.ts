@@ -42,7 +42,7 @@ export type EstadoPagoWeb = (typeof EstadoPagoWeb)[keyof typeof EstadoPagoWeb]
 
 export const Pagos = {
   EFECTIVO: 'EFECTIVO',
-  TRAJETA: 'TRAJETA',
+  TARJETA: 'TARJETA',
   TRANSFERENCIAQR: 'TRANSFERENCIAQR'
 } as const
 
