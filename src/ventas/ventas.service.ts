@@ -124,6 +124,18 @@ export class VentasService {
             apellido: true,
           },
         },
+        detallesVenta: {
+          select: {
+            cantidadArticulos: true,
+            subtotal: true,
+            articulo: {
+              select: {
+                nombre: true,
+                categoria: true,
+              },
+            },
+          },
+        },
       },
       omit: {
         id_usuario: true,
