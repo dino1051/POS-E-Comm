@@ -32,6 +32,7 @@ export type DetallesVentaWebAvgAggregateOutputType = {
   subtotal: runtime.Decimal | null
   id_ventaweb: number | null
   id_articulo: number | null
+  cantidadDevuelta: number | null
 }
 
 export type DetallesVentaWebSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type DetallesVentaWebSumAggregateOutputType = {
   subtotal: runtime.Decimal | null
   id_ventaweb: number | null
   id_articulo: number | null
+  cantidadDevuelta: number | null
 }
 
 export type DetallesVentaWebMinAggregateOutputType = {
@@ -48,6 +50,7 @@ export type DetallesVentaWebMinAggregateOutputType = {
   subtotal: runtime.Decimal | null
   id_ventaweb: number | null
   id_articulo: number | null
+  cantidadDevuelta: number | null
 }
 
 export type DetallesVentaWebMaxAggregateOutputType = {
@@ -56,6 +59,7 @@ export type DetallesVentaWebMaxAggregateOutputType = {
   subtotal: runtime.Decimal | null
   id_ventaweb: number | null
   id_articulo: number | null
+  cantidadDevuelta: number | null
 }
 
 export type DetallesVentaWebCountAggregateOutputType = {
@@ -64,6 +68,7 @@ export type DetallesVentaWebCountAggregateOutputType = {
   subtotal: number
   id_ventaweb: number
   id_articulo: number
+  cantidadDevuelta: number
   _all: number
 }
 
@@ -74,6 +79,7 @@ export type DetallesVentaWebAvgAggregateInputType = {
   subtotal?: true
   id_ventaweb?: true
   id_articulo?: true
+  cantidadDevuelta?: true
 }
 
 export type DetallesVentaWebSumAggregateInputType = {
@@ -82,6 +88,7 @@ export type DetallesVentaWebSumAggregateInputType = {
   subtotal?: true
   id_ventaweb?: true
   id_articulo?: true
+  cantidadDevuelta?: true
 }
 
 export type DetallesVentaWebMinAggregateInputType = {
@@ -90,6 +97,7 @@ export type DetallesVentaWebMinAggregateInputType = {
   subtotal?: true
   id_ventaweb?: true
   id_articulo?: true
+  cantidadDevuelta?: true
 }
 
 export type DetallesVentaWebMaxAggregateInputType = {
@@ -98,6 +106,7 @@ export type DetallesVentaWebMaxAggregateInputType = {
   subtotal?: true
   id_ventaweb?: true
   id_articulo?: true
+  cantidadDevuelta?: true
 }
 
 export type DetallesVentaWebCountAggregateInputType = {
@@ -106,6 +115,7 @@ export type DetallesVentaWebCountAggregateInputType = {
   subtotal?: true
   id_ventaweb?: true
   id_articulo?: true
+  cantidadDevuelta?: true
   _all?: true
 }
 
@@ -201,6 +211,7 @@ export type DetallesVentaWebGroupByOutputType = {
   subtotal: runtime.Decimal
   id_ventaweb: number
   id_articulo: number
+  cantidadDevuelta: number
   _count: DetallesVentaWebCountAggregateOutputType | null
   _avg: DetallesVentaWebAvgAggregateOutputType | null
   _sum: DetallesVentaWebSumAggregateOutputType | null
@@ -232,6 +243,8 @@ export type DetallesVentaWebWhereInput = {
   subtotal?: Prisma.DecimalFilter<"DetallesVentaWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFilter<"DetallesVentaWeb"> | number
   id_articulo?: Prisma.IntFilter<"DetallesVentaWeb"> | number
+  cantidadDevuelta?: Prisma.IntFilter<"DetallesVentaWeb"> | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebListRelationFilter
   ventasweb?: Prisma.XOR<Prisma.VentasWebScalarRelationFilter, Prisma.VentasWebWhereInput>
   articulo?: Prisma.XOR<Prisma.ArticulosScalarRelationFilter, Prisma.ArticulosWhereInput>
 }
@@ -242,6 +255,8 @@ export type DetallesVentaWebOrderByWithRelationInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
+  devolucionesweb?: Prisma.DetallesDevolucionWebOrderByRelationAggregateInput
   ventasweb?: Prisma.VentasWebOrderByWithRelationInput
   articulo?: Prisma.ArticulosOrderByWithRelationInput
 }
@@ -255,6 +270,8 @@ export type DetallesVentaWebWhereUniqueInput = Prisma.AtLeast<{
   subtotal?: Prisma.DecimalFilter<"DetallesVentaWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFilter<"DetallesVentaWeb"> | number
   id_articulo?: Prisma.IntFilter<"DetallesVentaWeb"> | number
+  cantidadDevuelta?: Prisma.IntFilter<"DetallesVentaWeb"> | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebListRelationFilter
   ventasweb?: Prisma.XOR<Prisma.VentasWebScalarRelationFilter, Prisma.VentasWebWhereInput>
   articulo?: Prisma.XOR<Prisma.ArticulosScalarRelationFilter, Prisma.ArticulosWhereInput>
 }, "id">
@@ -265,6 +282,7 @@ export type DetallesVentaWebOrderByWithAggregationInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
   _count?: Prisma.DetallesVentaWebCountOrderByAggregateInput
   _avg?: Prisma.DetallesVentaWebAvgOrderByAggregateInput
   _max?: Prisma.DetallesVentaWebMaxOrderByAggregateInput
@@ -281,11 +299,14 @@ export type DetallesVentaWebScalarWhereWithAggregatesInput = {
   subtotal?: Prisma.DecimalWithAggregatesFilter<"DetallesVentaWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntWithAggregatesFilter<"DetallesVentaWeb"> | number
   id_articulo?: Prisma.IntWithAggregatesFilter<"DetallesVentaWeb"> | number
+  cantidadDevuelta?: Prisma.IntWithAggregatesFilter<"DetallesVentaWeb"> | number
 }
 
 export type DetallesVentaWebCreateInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebCreateNestedManyWithoutDetalleVentawebInput
   ventasweb: Prisma.VentasWebCreateNestedOneWithoutDetallesventawebInput
   articulo: Prisma.ArticulosCreateNestedOneWithoutDetallesventaswebInput
 }
@@ -296,11 +317,15 @@ export type DetallesVentaWebUncheckedCreateInput = {
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb: number
   id_articulo: number
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedCreateNestedManyWithoutDetalleVentawebInput
 }
 
 export type DetallesVentaWebUpdateInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUpdateManyWithoutDetalleVentawebNestedInput
   ventasweb?: Prisma.VentasWebUpdateOneRequiredWithoutDetallesventawebNestedInput
   articulo?: Prisma.ArticulosUpdateOneRequiredWithoutDetallesventaswebNestedInput
 }
@@ -311,6 +336,8 @@ export type DetallesVentaWebUncheckedUpdateInput = {
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFieldUpdateOperationsInput | number
   id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedUpdateManyWithoutDetalleVentawebNestedInput
 }
 
 export type DetallesVentaWebCreateManyInput = {
@@ -319,11 +346,13 @@ export type DetallesVentaWebCreateManyInput = {
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb: number
   id_articulo: number
+  cantidadDevuelta?: number
 }
 
 export type DetallesVentaWebUpdateManyMutationInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesVentaWebUncheckedUpdateManyInput = {
@@ -332,6 +361,7 @@ export type DetallesVentaWebUncheckedUpdateManyInput = {
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFieldUpdateOperationsInput | number
   id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesVentaWebListRelationFilter = {
@@ -350,6 +380,7 @@ export type DetallesVentaWebCountOrderByAggregateInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
 }
 
 export type DetallesVentaWebAvgOrderByAggregateInput = {
@@ -358,6 +389,7 @@ export type DetallesVentaWebAvgOrderByAggregateInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
 }
 
 export type DetallesVentaWebMaxOrderByAggregateInput = {
@@ -366,6 +398,7 @@ export type DetallesVentaWebMaxOrderByAggregateInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
 }
 
 export type DetallesVentaWebMinOrderByAggregateInput = {
@@ -374,6 +407,7 @@ export type DetallesVentaWebMinOrderByAggregateInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
 }
 
 export type DetallesVentaWebSumOrderByAggregateInput = {
@@ -382,6 +416,12 @@ export type DetallesVentaWebSumOrderByAggregateInput = {
   subtotal?: Prisma.SortOrder
   id_ventaweb?: Prisma.SortOrder
   id_articulo?: Prisma.SortOrder
+  cantidadDevuelta?: Prisma.SortOrder
+}
+
+export type DetallesVentaWebScalarRelationFilter = {
+  is?: Prisma.DetallesVentaWebWhereInput
+  isNot?: Prisma.DetallesVentaWebWhereInput
 }
 
 export type DetallesVentaWebCreateNestedManyWithoutArticuloInput = {
@@ -468,9 +508,25 @@ export type DetallesVentaWebUncheckedUpdateManyWithoutVentaswebNestedInput = {
   deleteMany?: Prisma.DetallesVentaWebScalarWhereInput | Prisma.DetallesVentaWebScalarWhereInput[]
 }
 
+export type DetallesVentaWebCreateNestedOneWithoutDevolucioneswebInput = {
+  create?: Prisma.XOR<Prisma.DetallesVentaWebCreateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedCreateWithoutDevolucioneswebInput>
+  connectOrCreate?: Prisma.DetallesVentaWebCreateOrConnectWithoutDevolucioneswebInput
+  connect?: Prisma.DetallesVentaWebWhereUniqueInput
+}
+
+export type DetallesVentaWebUpdateOneRequiredWithoutDevolucioneswebNestedInput = {
+  create?: Prisma.XOR<Prisma.DetallesVentaWebCreateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedCreateWithoutDevolucioneswebInput>
+  connectOrCreate?: Prisma.DetallesVentaWebCreateOrConnectWithoutDevolucioneswebInput
+  upsert?: Prisma.DetallesVentaWebUpsertWithoutDevolucioneswebInput
+  connect?: Prisma.DetallesVentaWebWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DetallesVentaWebUpdateToOneWithWhereWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUpdateWithoutDevolucioneswebInput>, Prisma.DetallesVentaWebUncheckedUpdateWithoutDevolucioneswebInput>
+}
+
 export type DetallesVentaWebCreateWithoutArticuloInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebCreateNestedManyWithoutDetalleVentawebInput
   ventasweb: Prisma.VentasWebCreateNestedOneWithoutDetallesventawebInput
 }
 
@@ -479,6 +535,8 @@ export type DetallesVentaWebUncheckedCreateWithoutArticuloInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb: number
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedCreateNestedManyWithoutDetalleVentawebInput
 }
 
 export type DetallesVentaWebCreateOrConnectWithoutArticuloInput = {
@@ -516,11 +574,14 @@ export type DetallesVentaWebScalarWhereInput = {
   subtotal?: Prisma.DecimalFilter<"DetallesVentaWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFilter<"DetallesVentaWeb"> | number
   id_articulo?: Prisma.IntFilter<"DetallesVentaWeb"> | number
+  cantidadDevuelta?: Prisma.IntFilter<"DetallesVentaWeb"> | number
 }
 
 export type DetallesVentaWebCreateWithoutVentaswebInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebCreateNestedManyWithoutDetalleVentawebInput
   articulo: Prisma.ArticulosCreateNestedOneWithoutDetallesventaswebInput
 }
 
@@ -529,6 +590,8 @@ export type DetallesVentaWebUncheckedCreateWithoutVentaswebInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_articulo: number
+  cantidadDevuelta?: number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedCreateNestedManyWithoutDetalleVentawebInput
 }
 
 export type DetallesVentaWebCreateOrConnectWithoutVentaswebInput = {
@@ -557,16 +620,69 @@ export type DetallesVentaWebUpdateManyWithWhereWithoutVentaswebInput = {
   data: Prisma.XOR<Prisma.DetallesVentaWebUpdateManyMutationInput, Prisma.DetallesVentaWebUncheckedUpdateManyWithoutVentaswebInput>
 }
 
+export type DetallesVentaWebCreateWithoutDevolucioneswebInput = {
+  cantidadArticulos: number
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: number
+  ventasweb: Prisma.VentasWebCreateNestedOneWithoutDetallesventawebInput
+  articulo: Prisma.ArticulosCreateNestedOneWithoutDetallesventaswebInput
+}
+
+export type DetallesVentaWebUncheckedCreateWithoutDevolucioneswebInput = {
+  id?: number
+  cantidadArticulos: number
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_ventaweb: number
+  id_articulo: number
+  cantidadDevuelta?: number
+}
+
+export type DetallesVentaWebCreateOrConnectWithoutDevolucioneswebInput = {
+  where: Prisma.DetallesVentaWebWhereUniqueInput
+  create: Prisma.XOR<Prisma.DetallesVentaWebCreateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedCreateWithoutDevolucioneswebInput>
+}
+
+export type DetallesVentaWebUpsertWithoutDevolucioneswebInput = {
+  update: Prisma.XOR<Prisma.DetallesVentaWebUpdateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedUpdateWithoutDevolucioneswebInput>
+  create: Prisma.XOR<Prisma.DetallesVentaWebCreateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedCreateWithoutDevolucioneswebInput>
+  where?: Prisma.DetallesVentaWebWhereInput
+}
+
+export type DetallesVentaWebUpdateToOneWithWhereWithoutDevolucioneswebInput = {
+  where?: Prisma.DetallesVentaWebWhereInput
+  data: Prisma.XOR<Prisma.DetallesVentaWebUpdateWithoutDevolucioneswebInput, Prisma.DetallesVentaWebUncheckedUpdateWithoutDevolucioneswebInput>
+}
+
+export type DetallesVentaWebUpdateWithoutDevolucioneswebInput = {
+  cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  ventasweb?: Prisma.VentasWebUpdateOneRequiredWithoutDetallesventawebNestedInput
+  articulo?: Prisma.ArticulosUpdateOneRequiredWithoutDetallesventaswebNestedInput
+}
+
+export type DetallesVentaWebUncheckedUpdateWithoutDevolucioneswebInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_ventaweb?: Prisma.IntFieldUpdateOperationsInput | number
+  id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
 export type DetallesVentaWebCreateManyArticuloInput = {
   id?: number
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb: number
+  cantidadDevuelta?: number
 }
 
 export type DetallesVentaWebUpdateWithoutArticuloInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUpdateManyWithoutDetalleVentawebNestedInput
   ventasweb?: Prisma.VentasWebUpdateOneRequiredWithoutDetallesventawebNestedInput
 }
 
@@ -575,6 +691,8 @@ export type DetallesVentaWebUncheckedUpdateWithoutArticuloInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedUpdateManyWithoutDetalleVentawebNestedInput
 }
 
 export type DetallesVentaWebUncheckedUpdateManyWithoutArticuloInput = {
@@ -582,6 +700,7 @@ export type DetallesVentaWebUncheckedUpdateManyWithoutArticuloInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_ventaweb?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesVentaWebCreateManyVentaswebInput = {
@@ -589,11 +708,14 @@ export type DetallesVentaWebCreateManyVentaswebInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_articulo: number
+  cantidadDevuelta?: number
 }
 
 export type DetallesVentaWebUpdateWithoutVentaswebInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUpdateManyWithoutDetalleVentawebNestedInput
   articulo?: Prisma.ArticulosUpdateOneRequiredWithoutDetallesventaswebNestedInput
 }
 
@@ -602,6 +724,8 @@ export type DetallesVentaWebUncheckedUpdateWithoutVentaswebInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
+  devolucionesweb?: Prisma.DetallesDevolucionWebUncheckedUpdateManyWithoutDetalleVentawebNestedInput
 }
 
 export type DetallesVentaWebUncheckedUpdateManyWithoutVentaswebInput = {
@@ -609,8 +733,38 @@ export type DetallesVentaWebUncheckedUpdateManyWithoutVentaswebInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadDevuelta?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+
+/**
+ * Count Type DetallesVentaWebCountOutputType
+ */
+
+export type DetallesVentaWebCountOutputType = {
+  devolucionesweb: number
+}
+
+export type DetallesVentaWebCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  devolucionesweb?: boolean | DetallesVentaWebCountOutputTypeCountDevolucioneswebArgs
+}
+
+/**
+ * DetallesVentaWebCountOutputType without action
+ */
+export type DetallesVentaWebCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DetallesVentaWebCountOutputType
+   */
+  select?: Prisma.DetallesVentaWebCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DetallesVentaWebCountOutputType without action
+ */
+export type DetallesVentaWebCountOutputTypeCountDevolucioneswebArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DetallesDevolucionWebWhereInput
+}
 
 
 export type DetallesVentaWebSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -619,8 +773,11 @@ export type DetallesVentaWebSelect<ExtArgs extends runtime.Types.Extensions.Inte
   subtotal?: boolean
   id_ventaweb?: boolean
   id_articulo?: boolean
+  cantidadDevuelta?: boolean
+  devolucionesweb?: boolean | Prisma.DetallesVentaWeb$devolucioneswebArgs<ExtArgs>
   ventasweb?: boolean | Prisma.VentasWebDefaultArgs<ExtArgs>
   articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.DetallesVentaWebCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesVentaWeb"]>
 
 export type DetallesVentaWebSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -629,6 +786,7 @@ export type DetallesVentaWebSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   subtotal?: boolean
   id_ventaweb?: boolean
   id_articulo?: boolean
+  cantidadDevuelta?: boolean
   ventasweb?: boolean | Prisma.VentasWebDefaultArgs<ExtArgs>
   articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesVentaWeb"]>
@@ -639,6 +797,7 @@ export type DetallesVentaWebSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   subtotal?: boolean
   id_ventaweb?: boolean
   id_articulo?: boolean
+  cantidadDevuelta?: boolean
   ventasweb?: boolean | Prisma.VentasWebDefaultArgs<ExtArgs>
   articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesVentaWeb"]>
@@ -649,12 +808,15 @@ export type DetallesVentaWebSelectScalar = {
   subtotal?: boolean
   id_ventaweb?: boolean
   id_articulo?: boolean
+  cantidadDevuelta?: boolean
 }
 
-export type DetallesVentaWebOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cantidadArticulos" | "subtotal" | "id_ventaweb" | "id_articulo", ExtArgs["result"]["detallesVentaWeb"]>
+export type DetallesVentaWebOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cantidadArticulos" | "subtotal" | "id_ventaweb" | "id_articulo" | "cantidadDevuelta", ExtArgs["result"]["detallesVentaWeb"]>
 export type DetallesVentaWebInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  devolucionesweb?: boolean | Prisma.DetallesVentaWeb$devolucioneswebArgs<ExtArgs>
   ventasweb?: boolean | Prisma.VentasWebDefaultArgs<ExtArgs>
   articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
+  _count?: boolean | Prisma.DetallesVentaWebCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DetallesVentaWebIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ventasweb?: boolean | Prisma.VentasWebDefaultArgs<ExtArgs>
@@ -668,6 +830,7 @@ export type DetallesVentaWebIncludeUpdateManyAndReturn<ExtArgs extends runtime.T
 export type $DetallesVentaWebPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DetallesVentaWeb"
   objects: {
+    devolucionesweb: Prisma.$DetallesDevolucionWebPayload<ExtArgs>[]
     ventasweb: Prisma.$VentasWebPayload<ExtArgs>
     articulo: Prisma.$ArticulosPayload<ExtArgs>
   }
@@ -677,6 +840,7 @@ export type $DetallesVentaWebPayload<ExtArgs extends runtime.Types.Extensions.In
     subtotal: runtime.Decimal
     id_ventaweb: number
     id_articulo: number
+    cantidadDevuelta: number
   }, ExtArgs["result"]["detallesVentaWeb"]>
   composites: {}
 }
@@ -1071,6 +1235,7 @@ readonly fields: DetallesVentaWebFieldRefs;
  */
 export interface Prisma__DetallesVentaWebClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  devolucionesweb<T extends Prisma.DetallesVentaWeb$devolucioneswebArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DetallesVentaWeb$devolucioneswebArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetallesDevolucionWebPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ventasweb<T extends Prisma.VentasWebDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VentasWebDefaultArgs<ExtArgs>>): Prisma.Prisma__VentasWebClient<runtime.Types.Result.GetResult<Prisma.$VentasWebPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   articulo<T extends Prisma.ArticulosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticulosDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticulosClient<runtime.Types.Result.GetResult<Prisma.$ArticulosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -1107,6 +1272,7 @@ export interface DetallesVentaWebFieldRefs {
   readonly subtotal: Prisma.FieldRef<"DetallesVentaWeb", 'Decimal'>
   readonly id_ventaweb: Prisma.FieldRef<"DetallesVentaWeb", 'Int'>
   readonly id_articulo: Prisma.FieldRef<"DetallesVentaWeb", 'Int'>
+  readonly cantidadDevuelta: Prisma.FieldRef<"DetallesVentaWeb", 'Int'>
 }
     
 
@@ -1505,6 +1671,30 @@ export type DetallesVentaWebDeleteManyArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many DetallesVentaWebs to delete.
    */
   limit?: number
+}
+
+/**
+ * DetallesVentaWeb.devolucionesweb
+ */
+export type DetallesVentaWeb$devolucioneswebArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DetallesDevolucionWeb
+   */
+  select?: Prisma.DetallesDevolucionWebSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DetallesDevolucionWeb
+   */
+  omit?: Prisma.DetallesDevolucionWebOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DetallesDevolucionWebInclude<ExtArgs> | null
+  where?: Prisma.DetallesDevolucionWebWhereInput
+  orderBy?: Prisma.DetallesDevolucionWebOrderByWithRelationInput | Prisma.DetallesDevolucionWebOrderByWithRelationInput[]
+  cursor?: Prisma.DetallesDevolucionWebWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DetallesDevolucionWebScalarFieldEnum | Prisma.DetallesDevolucionWebScalarFieldEnum[]
 }
 
 /**

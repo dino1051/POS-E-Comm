@@ -243,6 +243,7 @@ export type UserWhereInput = {
   venta?: Prisma.VentasListRelationFilter
   ventaWeb?: Prisma.VentasWebListRelationFilter
   compras?: Prisma.ComprasListRelationFilter
+  sesioncaja?: Prisma.SesionCajaListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -257,6 +258,7 @@ export type UserOrderByWithRelationInput = {
   venta?: Prisma.VentasOrderByRelationAggregateInput
   ventaWeb?: Prisma.VentasWebOrderByRelationAggregateInput
   compras?: Prisma.ComprasOrderByRelationAggregateInput
+  sesioncaja?: Prisma.SesionCajaOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -274,6 +276,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   venta?: Prisma.VentasListRelationFilter
   ventaWeb?: Prisma.VentasWebListRelationFilter
   compras?: Prisma.ComprasListRelationFilter
+  sesioncaja?: Prisma.SesionCajaListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -317,6 +320,7 @@ export type UserCreateInput = {
   venta?: Prisma.VentasCreateNestedManyWithoutUsuarioInput
   ventaWeb?: Prisma.VentasWebCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -331,6 +335,7 @@ export type UserUncheckedCreateInput = {
   venta?: Prisma.VentasUncheckedCreateNestedManyWithoutUsuarioInput
   ventaWeb?: Prisma.VentasWebUncheckedCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasUncheckedCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserUpdateInput = {
@@ -344,6 +349,7 @@ export type UserUpdateInput = {
   venta?: Prisma.VentasUpdateManyWithoutUsuarioNestedInput
   ventaWeb?: Prisma.VentasWebUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -358,6 +364,7 @@ export type UserUncheckedUpdateInput = {
   venta?: Prisma.VentasUncheckedUpdateManyWithoutUsuarioNestedInput
   ventaWeb?: Prisma.VentasWebUncheckedUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUncheckedUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -504,6 +511,20 @@ export type UserUpdateOneRequiredWithoutComprasNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutComprasInput, Prisma.UserUpdateWithoutComprasInput>, Prisma.UserUncheckedUpdateWithoutComprasInput>
 }
 
+export type UserCreateNestedOneWithoutSesioncajaInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSesioncajaInput, Prisma.UserUncheckedCreateWithoutSesioncajaInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSesioncajaInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSesioncajaNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSesioncajaInput, Prisma.UserUncheckedCreateWithoutSesioncajaInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSesioncajaInput
+  upsert?: Prisma.UserUpsertWithoutSesioncajaInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSesioncajaInput, Prisma.UserUpdateWithoutSesioncajaInput>, Prisma.UserUncheckedUpdateWithoutSesioncajaInput>
+}
+
 export type UserCreateWithoutVentaInput = {
   nombre: string
   apellido: string
@@ -514,6 +535,7 @@ export type UserCreateWithoutVentaInput = {
   creadoEn?: Date | string
   ventaWeb?: Prisma.VentasWebCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserUncheckedCreateWithoutVentaInput = {
@@ -527,6 +549,7 @@ export type UserUncheckedCreateWithoutVentaInput = {
   creadoEn?: Date | string
   ventaWeb?: Prisma.VentasWebUncheckedCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasUncheckedCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserCreateOrConnectWithoutVentaInput = {
@@ -555,6 +578,7 @@ export type UserUpdateWithoutVentaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ventaWeb?: Prisma.VentasWebUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVentaInput = {
@@ -568,6 +592,7 @@ export type UserUncheckedUpdateWithoutVentaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ventaWeb?: Prisma.VentasWebUncheckedUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUncheckedUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserCreateWithoutVentaWebInput = {
@@ -580,6 +605,7 @@ export type UserCreateWithoutVentaWebInput = {
   creadoEn?: Date | string
   venta?: Prisma.VentasCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserUncheckedCreateWithoutVentaWebInput = {
@@ -593,6 +619,7 @@ export type UserUncheckedCreateWithoutVentaWebInput = {
   creadoEn?: Date | string
   venta?: Prisma.VentasUncheckedCreateNestedManyWithoutUsuarioInput
   compras?: Prisma.ComprasUncheckedCreateNestedManyWithoutUsuariosInput
+  sesioncaja?: Prisma.SesionCajaUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserCreateOrConnectWithoutVentaWebInput = {
@@ -621,6 +648,7 @@ export type UserUpdateWithoutVentaWebInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   venta?: Prisma.VentasUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserUncheckedUpdateWithoutVentaWebInput = {
@@ -634,6 +662,7 @@ export type UserUncheckedUpdateWithoutVentaWebInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   venta?: Prisma.VentasUncheckedUpdateManyWithoutUsuarioNestedInput
   compras?: Prisma.ComprasUncheckedUpdateManyWithoutUsuariosNestedInput
+  sesioncaja?: Prisma.SesionCajaUncheckedUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserCreateWithoutComprasInput = {
@@ -646,6 +675,7 @@ export type UserCreateWithoutComprasInput = {
   creadoEn?: Date | string
   venta?: Prisma.VentasCreateNestedManyWithoutUsuarioInput
   ventaWeb?: Prisma.VentasWebCreateNestedManyWithoutUsuarioInput
+  sesioncaja?: Prisma.SesionCajaCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserUncheckedCreateWithoutComprasInput = {
@@ -659,6 +689,7 @@ export type UserUncheckedCreateWithoutComprasInput = {
   creadoEn?: Date | string
   venta?: Prisma.VentasUncheckedCreateNestedManyWithoutUsuarioInput
   ventaWeb?: Prisma.VentasWebUncheckedCreateNestedManyWithoutUsuarioInput
+  sesioncaja?: Prisma.SesionCajaUncheckedCreateNestedManyWithoutUsuarioInput
 }
 
 export type UserCreateOrConnectWithoutComprasInput = {
@@ -687,6 +718,7 @@ export type UserUpdateWithoutComprasInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   venta?: Prisma.VentasUpdateManyWithoutUsuarioNestedInput
   ventaWeb?: Prisma.VentasWebUpdateManyWithoutUsuarioNestedInput
+  sesioncaja?: Prisma.SesionCajaUpdateManyWithoutUsuarioNestedInput
 }
 
 export type UserUncheckedUpdateWithoutComprasInput = {
@@ -700,6 +732,77 @@ export type UserUncheckedUpdateWithoutComprasInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   venta?: Prisma.VentasUncheckedUpdateManyWithoutUsuarioNestedInput
   ventaWeb?: Prisma.VentasWebUncheckedUpdateManyWithoutUsuarioNestedInput
+  sesioncaja?: Prisma.SesionCajaUncheckedUpdateManyWithoutUsuarioNestedInput
+}
+
+export type UserCreateWithoutSesioncajaInput = {
+  nombre: string
+  apellido: string
+  email: string
+  password: string
+  direccion?: string | null
+  role?: $Enums.Role
+  creadoEn?: Date | string
+  venta?: Prisma.VentasCreateNestedManyWithoutUsuarioInput
+  ventaWeb?: Prisma.VentasWebCreateNestedManyWithoutUsuarioInput
+  compras?: Prisma.ComprasCreateNestedManyWithoutUsuariosInput
+}
+
+export type UserUncheckedCreateWithoutSesioncajaInput = {
+  id?: number
+  nombre: string
+  apellido: string
+  email: string
+  password: string
+  direccion?: string | null
+  role?: $Enums.Role
+  creadoEn?: Date | string
+  venta?: Prisma.VentasUncheckedCreateNestedManyWithoutUsuarioInput
+  ventaWeb?: Prisma.VentasWebUncheckedCreateNestedManyWithoutUsuarioInput
+  compras?: Prisma.ComprasUncheckedCreateNestedManyWithoutUsuariosInput
+}
+
+export type UserCreateOrConnectWithoutSesioncajaInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSesioncajaInput, Prisma.UserUncheckedCreateWithoutSesioncajaInput>
+}
+
+export type UserUpsertWithoutSesioncajaInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSesioncajaInput, Prisma.UserUncheckedUpdateWithoutSesioncajaInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSesioncajaInput, Prisma.UserUncheckedCreateWithoutSesioncajaInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSesioncajaInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSesioncajaInput, Prisma.UserUncheckedUpdateWithoutSesioncajaInput>
+}
+
+export type UserUpdateWithoutSesioncajaInput = {
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  venta?: Prisma.VentasUpdateManyWithoutUsuarioNestedInput
+  ventaWeb?: Prisma.VentasWebUpdateManyWithoutUsuarioNestedInput
+  compras?: Prisma.ComprasUpdateManyWithoutUsuariosNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSesioncajaInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  apellido?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  direccion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  venta?: Prisma.VentasUncheckedUpdateManyWithoutUsuarioNestedInput
+  ventaWeb?: Prisma.VentasWebUncheckedUpdateManyWithoutUsuarioNestedInput
+  compras?: Prisma.ComprasUncheckedUpdateManyWithoutUsuariosNestedInput
 }
 
 
@@ -711,12 +814,14 @@ export type UserCountOutputType = {
   venta: number
   ventaWeb: number
   compras: number
+  sesioncaja: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   venta?: boolean | UserCountOutputTypeCountVentaArgs
   ventaWeb?: boolean | UserCountOutputTypeCountVentaWebArgs
   compras?: boolean | UserCountOutputTypeCountComprasArgs
+  sesioncaja?: boolean | UserCountOutputTypeCountSesioncajaArgs
 }
 
 /**
@@ -750,6 +855,13 @@ export type UserCountOutputTypeCountComprasArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ComprasWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSesioncajaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SesionCajaWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -763,6 +875,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   venta?: boolean | Prisma.User$ventaArgs<ExtArgs>
   ventaWeb?: boolean | Prisma.User$ventaWebArgs<ExtArgs>
   compras?: boolean | Prisma.User$comprasArgs<ExtArgs>
+  sesioncaja?: boolean | Prisma.User$sesioncajaArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -804,6 +917,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   venta?: boolean | Prisma.User$ventaArgs<ExtArgs>
   ventaWeb?: boolean | Prisma.User$ventaWebArgs<ExtArgs>
   compras?: boolean | Prisma.User$comprasArgs<ExtArgs>
+  sesioncaja?: boolean | Prisma.User$sesioncajaArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -815,6 +929,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     venta: Prisma.$VentasPayload<ExtArgs>[]
     ventaWeb: Prisma.$VentasWebPayload<ExtArgs>[]
     compras: Prisma.$ComprasPayload<ExtArgs>[]
+    sesioncaja: Prisma.$SesionCajaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1222,6 +1337,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   venta<T extends Prisma.User$ventaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ventaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VentasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ventaWeb<T extends Prisma.User$ventaWebArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ventaWebArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VentasWebPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   compras<T extends Prisma.User$comprasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comprasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComprasPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sesioncaja<T extends Prisma.User$sesioncajaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sesioncajaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SesionCajaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1721,6 +1837,30 @@ export type User$comprasArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ComprasScalarFieldEnum | Prisma.ComprasScalarFieldEnum[]
+}
+
+/**
+ * User.sesioncaja
+ */
+export type User$sesioncajaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SesionCaja
+   */
+  select?: Prisma.SesionCajaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SesionCaja
+   */
+  omit?: Prisma.SesionCajaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SesionCajaInclude<ExtArgs> | null
+  where?: Prisma.SesionCajaWhereInput
+  orderBy?: Prisma.SesionCajaOrderByWithRelationInput | Prisma.SesionCajaOrderByWithRelationInput[]
+  cursor?: Prisma.SesionCajaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SesionCajaScalarFieldEnum | Prisma.SesionCajaScalarFieldEnum[]
 }
 
 /**

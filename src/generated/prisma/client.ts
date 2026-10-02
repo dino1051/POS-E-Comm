@@ -87,6 +87,16 @@ export type Devoluciones = Prisma.DevolucionesModel
  */
 export type DetallesDevolucion = Prisma.DetallesDevolucionModel
 /**
+ * Model DevolucionesWeb
+ * 
+ */
+export type DevolucionesWeb = Prisma.DevolucionesWebModel
+/**
+ * Model DetallesDevolucionWeb
+ * 
+ */
+export type DetallesDevolucionWeb = Prisma.DetallesDevolucionWebModel
+/**
  * Model Proveedores
  * 
  */
@@ -101,3 +111,13 @@ export type Compras = Prisma.ComprasModel
  * 
  */
 export type DetallesCompra = Prisma.DetallesCompraModel
+/**
+ * Model Pos
+ * 
+ */
+export type Pos = Prisma.PosModel
+/**
+ * Model SesionCaja
+ * 
+ */
+export type SesionCaja = Prisma.SesionCajaModel

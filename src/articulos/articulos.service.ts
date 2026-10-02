@@ -22,6 +22,21 @@ export class ArticulosService {
     });
   }
 
+  async findByStock(Max: string) {
+    try {
+      const stockMax = Number(Max);
+      return await this.prisma.articulos.findMany({
+        where: {
+          stock: {
+            lte: stockMax,
+          },
+        },
+      });
+    } catch (error) {
+      return new ConflictException('Valor invalido!');
+    }
+  }
+
   async createArticulo(createArticuloDto: CreateArticuloDto) {
     const existe = await this.findArticuloByName(createArticuloDto.nombre);
     if (existe) {
@@ -40,7 +55,14 @@ export class ArticulosService {
   }
 
   async findAllArticulos() {
-    return await this.prisma.articulos.findMany({ orderBy: { id: 'asc' } });
+    return await this.prisma.articulos.findMany({
+      select: {
+        id: true,
+        nombre: true,
+        stock: true,
+      },
+      orderBy: { id: 'asc' },
+    });
   }
 
   async updateArticulo(id: number, updateArticuloDto: UpdateArticuloDto) {
@@ -53,6 +75,10 @@ export class ArticulosService {
   async findOneArticulo(id: number) {
     const articulo = await this.prisma.articulos.findUnique({
       where: { id },
+      omit: {
+        id: true,
+        id_categoria: true,
+      },
     });
     if (!articulo) {
       throw new NotFoundException(`articulo de ID: ${id} no encontrado`);

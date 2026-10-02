@@ -406,9 +406,13 @@ export const ModelName = {
   DetallesVentaWeb: 'DetallesVentaWeb',
   Devoluciones: 'Devoluciones',
   DetallesDevolucion: 'DetallesDevolucion',
+  DevolucionesWeb: 'DevolucionesWeb',
+  DetallesDevolucionWeb: 'DetallesDevolucionWeb',
   Proveedores: 'Proveedores',
   Compras: 'Compras',
-  DetallesCompra: 'DetallesCompra'
+  DetallesCompra: 'DetallesCompra',
+  Pos: 'Pos',
+  SesionCaja: 'SesionCaja'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -424,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "articulos" | "categorias" | "ventas" | "detallesVenta" | "ventasWeb" | "detallesVentaWeb" | "devoluciones" | "detallesDevolucion" | "proveedores" | "compras" | "detallesCompra"
+    modelProps: "user" | "articulos" | "categorias" | "ventas" | "detallesVenta" | "ventasWeb" | "detallesVentaWeb" | "devoluciones" | "detallesDevolucion" | "devolucionesWeb" | "detallesDevolucionWeb" | "proveedores" | "compras" | "detallesCompra" | "pos" | "sesionCaja"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1094,6 +1098,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DevolucionesWeb: {
+      payload: Prisma.$DevolucionesWebPayload<ExtArgs>
+      fields: Prisma.DevolucionesWebFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DevolucionesWebFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DevolucionesWebFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        findFirst: {
+          args: Prisma.DevolucionesWebFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DevolucionesWebFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        findMany: {
+          args: Prisma.DevolucionesWebFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>[]
+        }
+        create: {
+          args: Prisma.DevolucionesWebCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        createMany: {
+          args: Prisma.DevolucionesWebCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DevolucionesWebCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>[]
+        }
+        delete: {
+          args: Prisma.DevolucionesWebDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        update: {
+          args: Prisma.DevolucionesWebUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        deleteMany: {
+          args: Prisma.DevolucionesWebDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DevolucionesWebUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DevolucionesWebUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>[]
+        }
+        upsert: {
+          args: Prisma.DevolucionesWebUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DevolucionesWebPayload>
+        }
+        aggregate: {
+          args: Prisma.DevolucionesWebAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDevolucionesWeb>
+        }
+        groupBy: {
+          args: Prisma.DevolucionesWebGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevolucionesWebGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DevolucionesWebCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DevolucionesWebCountAggregateOutputType> | number
+        }
+      }
+    }
+    DetallesDevolucionWeb: {
+      payload: Prisma.$DetallesDevolucionWebPayload<ExtArgs>
+      fields: Prisma.DetallesDevolucionWebFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DetallesDevolucionWebFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DetallesDevolucionWebFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        findFirst: {
+          args: Prisma.DetallesDevolucionWebFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DetallesDevolucionWebFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        findMany: {
+          args: Prisma.DetallesDevolucionWebFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>[]
+        }
+        create: {
+          args: Prisma.DetallesDevolucionWebCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        createMany: {
+          args: Prisma.DetallesDevolucionWebCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DetallesDevolucionWebCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>[]
+        }
+        delete: {
+          args: Prisma.DetallesDevolucionWebDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        update: {
+          args: Prisma.DetallesDevolucionWebUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        deleteMany: {
+          args: Prisma.DetallesDevolucionWebDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DetallesDevolucionWebUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DetallesDevolucionWebUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>[]
+        }
+        upsert: {
+          args: Prisma.DetallesDevolucionWebUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DetallesDevolucionWebPayload>
+        }
+        aggregate: {
+          args: Prisma.DetallesDevolucionWebAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDetallesDevolucionWeb>
+        }
+        groupBy: {
+          args: Prisma.DetallesDevolucionWebGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DetallesDevolucionWebGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DetallesDevolucionWebCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DetallesDevolucionWebCountAggregateOutputType> | number
+        }
+      }
+    }
     Proveedores: {
       payload: Prisma.$ProveedoresPayload<ExtArgs>
       fields: Prisma.ProveedoresFieldRefs
@@ -1316,6 +1468,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Pos: {
+      payload: Prisma.$PosPayload<ExtArgs>
+      fields: Prisma.PosFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PosFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PosFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        findFirst: {
+          args: Prisma.PosFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PosFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        findMany: {
+          args: Prisma.PosFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>[]
+        }
+        create: {
+          args: Prisma.PosCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        createMany: {
+          args: Prisma.PosCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PosCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>[]
+        }
+        delete: {
+          args: Prisma.PosDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        update: {
+          args: Prisma.PosUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        deleteMany: {
+          args: Prisma.PosDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PosUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PosUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>[]
+        }
+        upsert: {
+          args: Prisma.PosUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PosPayload>
+        }
+        aggregate: {
+          args: Prisma.PosAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePos>
+        }
+        groupBy: {
+          args: Prisma.PosGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PosGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PosCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PosCountAggregateOutputType> | number
+        }
+      }
+    }
+    SesionCaja: {
+      payload: Prisma.$SesionCajaPayload<ExtArgs>
+      fields: Prisma.SesionCajaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SesionCajaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SesionCajaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        findFirst: {
+          args: Prisma.SesionCajaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SesionCajaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        findMany: {
+          args: Prisma.SesionCajaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>[]
+        }
+        create: {
+          args: Prisma.SesionCajaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        createMany: {
+          args: Prisma.SesionCajaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SesionCajaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>[]
+        }
+        delete: {
+          args: Prisma.SesionCajaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        update: {
+          args: Prisma.SesionCajaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        deleteMany: {
+          args: Prisma.SesionCajaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SesionCajaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SesionCajaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>[]
+        }
+        upsert: {
+          args: Prisma.SesionCajaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SesionCajaPayload>
+        }
+        aggregate: {
+          args: Prisma.SesionCajaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSesionCaja>
+        }
+        groupBy: {
+          args: Prisma.SesionCajaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SesionCajaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SesionCajaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SesionCajaCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1397,6 +1697,7 @@ export const VentasScalarFieldEnum = {
   fecha: 'fecha',
   total: 'total',
   id_usuario: 'id_usuario',
+  id_sesion_caja: 'id_sesion_caja',
   tipo_pago: 'tipo_pago',
   estado: 'estado'
 } as const
@@ -1420,8 +1721,11 @@ export const VentasWebScalarFieldEnum = {
   id: 'id',
   fecha: 'fecha',
   total: 'total',
-  estado: 'estado',
-  id_usuario: 'id_usuario'
+  estadoweb: 'estadoweb',
+  estado_pago: 'estado_pago',
+  id_usuario: 'id_usuario',
+  id_pago_externo: 'id_pago_externo',
+  estado: 'estado'
 } as const
 
 export type VentasWebScalarFieldEnum = (typeof VentasWebScalarFieldEnum)[keyof typeof VentasWebScalarFieldEnum]
@@ -1432,7 +1736,8 @@ export const DetallesVentaWebScalarFieldEnum = {
   cantidadArticulos: 'cantidadArticulos',
   subtotal: 'subtotal',
   id_ventaweb: 'id_ventaweb',
-  id_articulo: 'id_articulo'
+  id_articulo: 'id_articulo',
+  cantidadDevuelta: 'cantidadDevuelta'
 } as const
 
 export type DetallesVentaWebScalarFieldEnum = (typeof DetallesVentaWebScalarFieldEnum)[keyof typeof DetallesVentaWebScalarFieldEnum]
@@ -1457,6 +1762,27 @@ export const DetallesDevolucionScalarFieldEnum = {
 } as const
 
 export type DetallesDevolucionScalarFieldEnum = (typeof DetallesDevolucionScalarFieldEnum)[keyof typeof DetallesDevolucionScalarFieldEnum]
+
+
+export const DevolucionesWebScalarFieldEnum = {
+  id: 'id',
+  fecha: 'fecha',
+  total: 'total',
+  id_ventaweb: 'id_ventaweb'
+} as const
+
+export type DevolucionesWebScalarFieldEnum = (typeof DevolucionesWebScalarFieldEnum)[keyof typeof DevolucionesWebScalarFieldEnum]
+
+
+export const DetallesDevolucionWebScalarFieldEnum = {
+  id: 'id',
+  cantidad: 'cantidad',
+  subtotal: 'subtotal',
+  id_devolucion: 'id_devolucion',
+  id_detalle_venta: 'id_detalle_venta'
+} as const
+
+export type DetallesDevolucionWebScalarFieldEnum = (typeof DetallesDevolucionWebScalarFieldEnum)[keyof typeof DetallesDevolucionWebScalarFieldEnum]
 
 
 export const ProveedoresScalarFieldEnum = {
@@ -1485,10 +1811,35 @@ export const DetallesCompraScalarFieldEnum = {
   id: 'id',
   cantidadArticulos: 'cantidadArticulos',
   subtotal: 'subtotal',
-  id_compra: 'id_compra'
+  id_compra: 'id_compra',
+  id_articulo: 'id_articulo'
 } as const
 
 export type DetallesCompraScalarFieldEnum = (typeof DetallesCompraScalarFieldEnum)[keyof typeof DetallesCompraScalarFieldEnum]
+
+
+export const PosScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  nombre: 'nombre',
+  activo: 'activo'
+} as const
+
+export type PosScalarFieldEnum = (typeof PosScalarFieldEnum)[keyof typeof PosScalarFieldEnum]
+
+
+export const SesionCajaScalarFieldEnum = {
+  id: 'id',
+  id_pos: 'id_pos',
+  id_usuario_apertura: 'id_usuario_apertura',
+  fecha_apertura: 'fecha_apertura',
+  monto_inicial: 'monto_inicial',
+  fecha_cierre: 'fecha_cierre',
+  monto_cierre: 'monto_cierre',
+  estado: 'estado'
+} as const
+
+export type SesionCajaScalarFieldEnum = (typeof SesionCajaScalarFieldEnum)[keyof typeof SesionCajaScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1630,6 +1981,41 @@ export type EnumEstadoWebFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
  * Reference to a field of type 'EstadoWeb[]'
  */
 export type ListEnumEstadoWebFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoWeb[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoPagoWeb'
+ */
+export type EnumEstadoPagoWebFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoPagoWeb'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoPagoWeb[]'
+ */
+export type ListEnumEstadoPagoWebFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoPagoWeb[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoSesionCaja'
+ */
+export type EnumEstadoSesionCajaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoSesionCaja'>
+    
+
+
+/**
+ * Reference to a field of type 'EstadoSesionCaja[]'
+ */
+export type ListEnumEstadoSesionCajaFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EstadoSesionCaja[]'>
     
 
 
@@ -1806,9 +2192,13 @@ export type GlobalOmitConfig = {
   detallesVentaWeb?: Prisma.DetallesVentaWebOmit
   devoluciones?: Prisma.DevolucionesOmit
   detallesDevolucion?: Prisma.DetallesDevolucionOmit
+  devolucionesWeb?: Prisma.DevolucionesWebOmit
+  detallesDevolucionWeb?: Prisma.DetallesDevolucionWebOmit
   proveedores?: Prisma.ProveedoresOmit
   compras?: Prisma.ComprasOmit
   detallesCompra?: Prisma.DetallesCompraOmit
+  pos?: Prisma.PosOmit
+  sesionCaja?: Prisma.SesionCajaOmit
 }
 
 /* Types for Logging */

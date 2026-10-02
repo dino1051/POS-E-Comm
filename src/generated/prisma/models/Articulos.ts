@@ -258,6 +258,7 @@ export type ArticulosWhereInput = {
   creadoEn?: Prisma.DateTimeFilter<"Articulos"> | Date | string
   detallesventas?: Prisma.DetallesVentaListRelationFilter
   detallesventasweb?: Prisma.DetallesVentaWebListRelationFilter
+  detallescompras?: Prisma.DetallesCompraListRelationFilter
   categoria?: Prisma.XOR<Prisma.CategoriasScalarRelationFilter, Prisma.CategoriasWhereInput>
 }
 
@@ -272,6 +273,7 @@ export type ArticulosOrderByWithRelationInput = {
   creadoEn?: Prisma.SortOrder
   detallesventas?: Prisma.DetallesVentaOrderByRelationAggregateInput
   detallesventasweb?: Prisma.DetallesVentaWebOrderByRelationAggregateInput
+  detallescompras?: Prisma.DetallesCompraOrderByRelationAggregateInput
   categoria?: Prisma.CategoriasOrderByWithRelationInput
 }
 
@@ -289,6 +291,7 @@ export type ArticulosWhereUniqueInput = Prisma.AtLeast<{
   creadoEn?: Prisma.DateTimeFilter<"Articulos"> | Date | string
   detallesventas?: Prisma.DetallesVentaListRelationFilter
   detallesventasweb?: Prisma.DetallesVentaWebListRelationFilter
+  detallescompras?: Prisma.DetallesCompraListRelationFilter
   categoria?: Prisma.XOR<Prisma.CategoriasScalarRelationFilter, Prisma.CategoriasWhereInput>
 }, "id" | "nombre">
 
@@ -331,6 +334,7 @@ export type ArticulosCreateInput = {
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaCreateNestedManyWithoutArticuloInput
   detallesventasweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraCreateNestedManyWithoutArticuloInput
   categoria: Prisma.CategoriasCreateNestedOneWithoutArticulosInput
 }
 
@@ -345,6 +349,7 @@ export type ArticulosUncheckedCreateInput = {
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedCreateNestedManyWithoutArticuloInput
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraUncheckedCreateNestedManyWithoutArticuloInput
 }
 
 export type ArticulosUpdateInput = {
@@ -356,6 +361,7 @@ export type ArticulosUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUpdateManyWithoutArticuloNestedInput
   detallesventasweb?: Prisma.DetallesVentaWebUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUpdateManyWithoutArticuloNestedInput
   categoria?: Prisma.CategoriasUpdateOneRequiredWithoutArticulosNestedInput
 }
 
@@ -370,6 +376,7 @@ export type ArticulosUncheckedUpdateInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedUpdateManyWithoutArticuloNestedInput
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUncheckedUpdateManyWithoutArticuloNestedInput
 }
 
 export type ArticulosCreateManyInput = {
@@ -545,6 +552,20 @@ export type ArticulosUpdateOneRequiredWithoutDetallesventaswebNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ArticulosUpdateToOneWithWhereWithoutDetallesventaswebInput, Prisma.ArticulosUpdateWithoutDetallesventaswebInput>, Prisma.ArticulosUncheckedUpdateWithoutDetallesventaswebInput>
 }
 
+export type ArticulosCreateNestedOneWithoutDetallescomprasInput = {
+  create?: Prisma.XOR<Prisma.ArticulosCreateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedCreateWithoutDetallescomprasInput>
+  connectOrCreate?: Prisma.ArticulosCreateOrConnectWithoutDetallescomprasInput
+  connect?: Prisma.ArticulosWhereUniqueInput
+}
+
+export type ArticulosUpdateOneRequiredWithoutDetallescomprasNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticulosCreateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedCreateWithoutDetallescomprasInput>
+  connectOrCreate?: Prisma.ArticulosCreateOrConnectWithoutDetallescomprasInput
+  upsert?: Prisma.ArticulosUpsertWithoutDetallescomprasInput
+  connect?: Prisma.ArticulosWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticulosUpdateToOneWithWhereWithoutDetallescomprasInput, Prisma.ArticulosUpdateWithoutDetallescomprasInput>, Prisma.ArticulosUncheckedUpdateWithoutDetallescomprasInput>
+}
+
 export type ArticulosCreateWithoutCategoriaInput = {
   nombre: string
   descripcion?: string | null
@@ -554,6 +575,7 @@ export type ArticulosCreateWithoutCategoriaInput = {
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaCreateNestedManyWithoutArticuloInput
   detallesventasweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraCreateNestedManyWithoutArticuloInput
 }
 
 export type ArticulosUncheckedCreateWithoutCategoriaInput = {
@@ -566,6 +588,7 @@ export type ArticulosUncheckedCreateWithoutCategoriaInput = {
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedCreateNestedManyWithoutArticuloInput
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraUncheckedCreateNestedManyWithoutArticuloInput
 }
 
 export type ArticulosCreateOrConnectWithoutCategoriaInput = {
@@ -616,6 +639,7 @@ export type ArticulosCreateWithoutDetallesventasInput = {
   precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Date | string
   detallesventasweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraCreateNestedManyWithoutArticuloInput
   categoria: Prisma.CategoriasCreateNestedOneWithoutArticulosInput
 }
 
@@ -629,6 +653,7 @@ export type ArticulosUncheckedCreateWithoutDetallesventasInput = {
   precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Date | string
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraUncheckedCreateNestedManyWithoutArticuloInput
 }
 
 export type ArticulosCreateOrConnectWithoutDetallesventasInput = {
@@ -655,6 +680,7 @@ export type ArticulosUpdateWithoutDetallesventasInput = {
   precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventasweb?: Prisma.DetallesVentaWebUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUpdateManyWithoutArticuloNestedInput
   categoria?: Prisma.CategoriasUpdateOneRequiredWithoutArticulosNestedInput
 }
 
@@ -668,6 +694,7 @@ export type ArticulosUncheckedUpdateWithoutDetallesventasInput = {
   precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUncheckedUpdateManyWithoutArticuloNestedInput
 }
 
 export type ArticulosCreateWithoutDetallesventaswebInput = {
@@ -678,6 +705,7 @@ export type ArticulosCreateWithoutDetallesventaswebInput = {
   precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraCreateNestedManyWithoutArticuloInput
   categoria: Prisma.CategoriasCreateNestedOneWithoutArticulosInput
 }
 
@@ -691,6 +719,7 @@ export type ArticulosUncheckedCreateWithoutDetallesventaswebInput = {
   precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedCreateNestedManyWithoutArticuloInput
+  detallescompras?: Prisma.DetallesCompraUncheckedCreateNestedManyWithoutArticuloInput
 }
 
 export type ArticulosCreateOrConnectWithoutDetallesventaswebInput = {
@@ -717,6 +746,7 @@ export type ArticulosUpdateWithoutDetallesventaswebInput = {
   precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUpdateManyWithoutArticuloNestedInput
   categoria?: Prisma.CategoriasUpdateOneRequiredWithoutArticulosNestedInput
 }
 
@@ -730,6 +760,73 @@ export type ArticulosUncheckedUpdateWithoutDetallesventaswebInput = {
   precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUncheckedUpdateManyWithoutArticuloNestedInput
+}
+
+export type ArticulosCreateWithoutDetallescomprasInput = {
+  nombre: string
+  descripcion?: string | null
+  stock: number
+  precioVenta: runtime.Decimal | runtime.DecimalJsLike | number | string
+  precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
+  creadoEn?: Date | string
+  detallesventas?: Prisma.DetallesVentaCreateNestedManyWithoutArticuloInput
+  detallesventasweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutArticuloInput
+  categoria: Prisma.CategoriasCreateNestedOneWithoutArticulosInput
+}
+
+export type ArticulosUncheckedCreateWithoutDetallescomprasInput = {
+  id?: number
+  nombre: string
+  id_categoria: number
+  descripcion?: string | null
+  stock: number
+  precioVenta: runtime.Decimal | runtime.DecimalJsLike | number | string
+  precioCompra: runtime.Decimal | runtime.DecimalJsLike | number | string
+  creadoEn?: Date | string
+  detallesventas?: Prisma.DetallesVentaUncheckedCreateNestedManyWithoutArticuloInput
+  detallesventasweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutArticuloInput
+}
+
+export type ArticulosCreateOrConnectWithoutDetallescomprasInput = {
+  where: Prisma.ArticulosWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticulosCreateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedCreateWithoutDetallescomprasInput>
+}
+
+export type ArticulosUpsertWithoutDetallescomprasInput = {
+  update: Prisma.XOR<Prisma.ArticulosUpdateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedUpdateWithoutDetallescomprasInput>
+  create: Prisma.XOR<Prisma.ArticulosCreateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedCreateWithoutDetallescomprasInput>
+  where?: Prisma.ArticulosWhereInput
+}
+
+export type ArticulosUpdateToOneWithWhereWithoutDetallescomprasInput = {
+  where?: Prisma.ArticulosWhereInput
+  data: Prisma.XOR<Prisma.ArticulosUpdateWithoutDetallescomprasInput, Prisma.ArticulosUncheckedUpdateWithoutDetallescomprasInput>
+}
+
+export type ArticulosUpdateWithoutDetallescomprasInput = {
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  precioVenta?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  detallesventas?: Prisma.DetallesVentaUpdateManyWithoutArticuloNestedInput
+  detallesventasweb?: Prisma.DetallesVentaWebUpdateManyWithoutArticuloNestedInput
+  categoria?: Prisma.CategoriasUpdateOneRequiredWithoutArticulosNestedInput
+}
+
+export type ArticulosUncheckedUpdateWithoutDetallescomprasInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nombre?: Prisma.StringFieldUpdateOperationsInput | string
+  id_categoria?: Prisma.IntFieldUpdateOperationsInput | number
+  descripcion?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stock?: Prisma.IntFieldUpdateOperationsInput | number
+  precioVenta?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  precioCompra?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  detallesventas?: Prisma.DetallesVentaUncheckedUpdateManyWithoutArticuloNestedInput
+  detallesventasweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutArticuloNestedInput
 }
 
 export type ArticulosCreateManyCategoriaInput = {
@@ -751,6 +848,7 @@ export type ArticulosUpdateWithoutCategoriaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUpdateManyWithoutArticuloNestedInput
   detallesventasweb?: Prisma.DetallesVentaWebUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUpdateManyWithoutArticuloNestedInput
 }
 
 export type ArticulosUncheckedUpdateWithoutCategoriaInput = {
@@ -763,6 +861,7 @@ export type ArticulosUncheckedUpdateWithoutCategoriaInput = {
   creadoEn?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   detallesventas?: Prisma.DetallesVentaUncheckedUpdateManyWithoutArticuloNestedInput
   detallesventasweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutArticuloNestedInput
+  detallescompras?: Prisma.DetallesCompraUncheckedUpdateManyWithoutArticuloNestedInput
 }
 
 export type ArticulosUncheckedUpdateManyWithoutCategoriaInput = {
@@ -783,11 +882,13 @@ export type ArticulosUncheckedUpdateManyWithoutCategoriaInput = {
 export type ArticulosCountOutputType = {
   detallesventas: number
   detallesventasweb: number
+  detallescompras: number
 }
 
 export type ArticulosCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   detallesventas?: boolean | ArticulosCountOutputTypeCountDetallesventasArgs
   detallesventasweb?: boolean | ArticulosCountOutputTypeCountDetallesventaswebArgs
+  detallescompras?: boolean | ArticulosCountOutputTypeCountDetallescomprasArgs
 }
 
 /**
@@ -814,6 +915,13 @@ export type ArticulosCountOutputTypeCountDetallesventaswebArgs<ExtArgs extends r
   where?: Prisma.DetallesVentaWebWhereInput
 }
 
+/**
+ * ArticulosCountOutputType without action
+ */
+export type ArticulosCountOutputTypeCountDetallescomprasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DetallesCompraWhereInput
+}
+
 
 export type ArticulosSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -826,6 +934,7 @@ export type ArticulosSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   creadoEn?: boolean
   detallesventas?: boolean | Prisma.Articulos$detallesventasArgs<ExtArgs>
   detallesventasweb?: boolean | Prisma.Articulos$detallesventaswebArgs<ExtArgs>
+  detallescompras?: boolean | Prisma.Articulos$detallescomprasArgs<ExtArgs>
   categoria?: boolean | Prisma.CategoriasDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ArticulosCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articulos"]>
@@ -869,6 +978,7 @@ export type ArticulosOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type ArticulosInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   detallesventas?: boolean | Prisma.Articulos$detallesventasArgs<ExtArgs>
   detallesventasweb?: boolean | Prisma.Articulos$detallesventaswebArgs<ExtArgs>
+  detallescompras?: boolean | Prisma.Articulos$detallescomprasArgs<ExtArgs>
   categoria?: boolean | Prisma.CategoriasDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ArticulosCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -884,6 +994,7 @@ export type $ArticulosPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     detallesventas: Prisma.$DetallesVentaPayload<ExtArgs>[]
     detallesventasweb: Prisma.$DetallesVentaWebPayload<ExtArgs>[]
+    detallescompras: Prisma.$DetallesCompraPayload<ExtArgs>[]
     categoria: Prisma.$CategoriasPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1291,6 +1402,7 @@ export interface Prisma__ArticulosClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   detallesventas<T extends Prisma.Articulos$detallesventasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Articulos$detallesventasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetallesVentaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   detallesventasweb<T extends Prisma.Articulos$detallesventaswebArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Articulos$detallesventaswebArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetallesVentaWebPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  detallescompras<T extends Prisma.Articulos$detallescomprasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Articulos$detallescomprasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetallesCompraPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   categoria<T extends Prisma.CategoriasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoriasDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoriasClient<runtime.Types.Result.GetResult<Prisma.$CategoriasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1775,6 +1887,30 @@ export type Articulos$detallesventaswebArgs<ExtArgs extends runtime.Types.Extens
   take?: number
   skip?: number
   distinct?: Prisma.DetallesVentaWebScalarFieldEnum | Prisma.DetallesVentaWebScalarFieldEnum[]
+}
+
+/**
+ * Articulos.detallescompras
+ */
+export type Articulos$detallescomprasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DetallesCompra
+   */
+  select?: Prisma.DetallesCompraSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DetallesCompra
+   */
+  omit?: Prisma.DetallesCompraOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DetallesCompraInclude<ExtArgs> | null
+  where?: Prisma.DetallesCompraWhereInput
+  orderBy?: Prisma.DetallesCompraOrderByWithRelationInput | Prisma.DetallesCompraOrderByWithRelationInput[]
+  cursor?: Prisma.DetallesCompraWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DetallesCompraScalarFieldEnum | Prisma.DetallesCompraScalarFieldEnum[]
 }
 
 /**

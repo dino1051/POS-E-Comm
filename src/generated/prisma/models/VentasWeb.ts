@@ -42,24 +42,33 @@ export type VentasWebMinAggregateOutputType = {
   id: number | null
   fecha: Date | null
   total: runtime.Decimal | null
-  estado: $Enums.EstadoWeb | null
+  estadoweb: $Enums.EstadoWeb | null
+  estado_pago: $Enums.EstadoPagoWeb | null
   id_usuario: number | null
+  id_pago_externo: string | null
+  estado: $Enums.EstadoVenta | null
 }
 
 export type VentasWebMaxAggregateOutputType = {
   id: number | null
   fecha: Date | null
   total: runtime.Decimal | null
-  estado: $Enums.EstadoWeb | null
+  estadoweb: $Enums.EstadoWeb | null
+  estado_pago: $Enums.EstadoPagoWeb | null
   id_usuario: number | null
+  id_pago_externo: string | null
+  estado: $Enums.EstadoVenta | null
 }
 
 export type VentasWebCountAggregateOutputType = {
   id: number
   fecha: number
   total: number
-  estado: number
+  estadoweb: number
+  estado_pago: number
   id_usuario: number
+  id_pago_externo: number
+  estado: number
   _all: number
 }
 
@@ -80,24 +89,33 @@ export type VentasWebMinAggregateInputType = {
   id?: true
   fecha?: true
   total?: true
-  estado?: true
+  estadoweb?: true
+  estado_pago?: true
   id_usuario?: true
+  id_pago_externo?: true
+  estado?: true
 }
 
 export type VentasWebMaxAggregateInputType = {
   id?: true
   fecha?: true
   total?: true
-  estado?: true
+  estadoweb?: true
+  estado_pago?: true
   id_usuario?: true
+  id_pago_externo?: true
+  estado?: true
 }
 
 export type VentasWebCountAggregateInputType = {
   id?: true
   fecha?: true
   total?: true
-  estado?: true
+  estadoweb?: true
+  estado_pago?: true
   id_usuario?: true
+  id_pago_externo?: true
+  estado?: true
   _all?: true
 }
 
@@ -191,8 +209,11 @@ export type VentasWebGroupByOutputType = {
   id: number
   fecha: Date
   total: runtime.Decimal
-  estado: $Enums.EstadoWeb
+  estadoweb: $Enums.EstadoWeb
+  estado_pago: $Enums.EstadoPagoWeb
   id_usuario: number
+  id_pago_externo: string | null
+  estado: $Enums.EstadoVenta
   _count: VentasWebCountAggregateOutputType | null
   _avg: VentasWebAvgAggregateOutputType | null
   _sum: VentasWebSumAggregateOutputType | null
@@ -222,41 +243,56 @@ export type VentasWebWhereInput = {
   id?: Prisma.IntFilter<"VentasWeb"> | number
   fecha?: Prisma.DateTimeFilter<"VentasWeb"> | Date | string
   total?: Prisma.DecimalFilter<"VentasWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFilter<"VentasWeb"> | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFilter<"VentasWeb"> | number
+  id_pago_externo?: Prisma.StringNullableFilter<"VentasWeb"> | string | null
+  estado?: Prisma.EnumEstadoVentaFilter<"VentasWeb"> | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebListRelationFilter
   usuario?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  devolucion?: Prisma.DevolucionesWebListRelationFilter
 }
 
 export type VentasWebOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  estado?: Prisma.SortOrder
+  estadoweb?: Prisma.SortOrder
+  estado_pago?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  id_pago_externo?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrder
   detallesventaweb?: Prisma.DetallesVentaWebOrderByRelationAggregateInput
   usuario?: Prisma.UserOrderByWithRelationInput
+  devolucion?: Prisma.DevolucionesWebOrderByRelationAggregateInput
 }
 
 export type VentasWebWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  id_pago_externo?: string
   AND?: Prisma.VentasWebWhereInput | Prisma.VentasWebWhereInput[]
   OR?: Prisma.VentasWebWhereInput[]
   NOT?: Prisma.VentasWebWhereInput | Prisma.VentasWebWhereInput[]
   fecha?: Prisma.DateTimeFilter<"VentasWeb"> | Date | string
   total?: Prisma.DecimalFilter<"VentasWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFilter<"VentasWeb"> | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFilter<"VentasWeb"> | number
+  estado?: Prisma.EnumEstadoVentaFilter<"VentasWeb"> | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebListRelationFilter
   usuario?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id">
+  devolucion?: Prisma.DevolucionesWebListRelationFilter
+}, "id" | "id_pago_externo">
 
 export type VentasWebOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  estado?: Prisma.SortOrder
+  estadoweb?: Prisma.SortOrder
+  estado_pago?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  id_pago_externo?: Prisma.SortOrderInput | Prisma.SortOrder
+  estado?: Prisma.SortOrder
   _count?: Prisma.VentasWebCountOrderByAggregateInput
   _avg?: Prisma.VentasWebAvgOrderByAggregateInput
   _max?: Prisma.VentasWebMaxOrderByAggregateInput
@@ -271,64 +307,92 @@ export type VentasWebScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"VentasWeb"> | number
   fecha?: Prisma.DateTimeWithAggregatesFilter<"VentasWeb"> | Date | string
   total?: Prisma.DecimalWithAggregatesFilter<"VentasWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebWithAggregatesFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebWithAggregatesFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebWithAggregatesFilter<"VentasWeb"> | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntWithAggregatesFilter<"VentasWeb"> | number
+  id_pago_externo?: Prisma.StringNullableWithAggregatesFilter<"VentasWeb"> | string | null
+  estado?: Prisma.EnumEstadoVentaWithAggregatesFilter<"VentasWeb"> | $Enums.EstadoVenta
 }
 
 export type VentasWebCreateInput = {
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutVentaswebInput
   usuario: Prisma.UserCreateNestedOneWithoutVentaWebInput
+  devolucion?: Prisma.DevolucionesWebCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebUncheckedCreateInput = {
   id?: number
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
   id_usuario: number
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutVentaswebInput
+  devolucion?: Prisma.DevolucionesWebUncheckedCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebUpdateInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUpdateManyWithoutVentaswebNestedInput
   usuario?: Prisma.UserUpdateOneRequiredWithoutVentaWebNestedInput
+  devolucion?: Prisma.DevolucionesWebUpdateManyWithoutVentawebNestedInput
 }
 
 export type VentasWebUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutVentaswebNestedInput
+  devolucion?: Prisma.DevolucionesWebUncheckedUpdateManyWithoutVentawebNestedInput
 }
 
 export type VentasWebCreateManyInput = {
   id?: number
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
   id_usuario: number
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
 }
 
 export type VentasWebUpdateManyMutationInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
 }
 
 export type VentasWebUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
 }
 
 export type VentasWebListRelationFilter = {
@@ -345,8 +409,11 @@ export type VentasWebCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  estado?: Prisma.SortOrder
+  estadoweb?: Prisma.SortOrder
+  estado_pago?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  id_pago_externo?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
 }
 
 export type VentasWebAvgOrderByAggregateInput = {
@@ -359,16 +426,22 @@ export type VentasWebMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  estado?: Prisma.SortOrder
+  estadoweb?: Prisma.SortOrder
+  estado_pago?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  id_pago_externo?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
 }
 
 export type VentasWebMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   fecha?: Prisma.SortOrder
   total?: Prisma.SortOrder
-  estado?: Prisma.SortOrder
+  estadoweb?: Prisma.SortOrder
+  estado_pago?: Prisma.SortOrder
   id_usuario?: Prisma.SortOrder
+  id_pago_externo?: Prisma.SortOrder
+  estado?: Prisma.SortOrder
 }
 
 export type VentasWebSumOrderByAggregateInput = {
@@ -428,6 +501,10 @@ export type EnumEstadoWebFieldUpdateOperationsInput = {
   set?: $Enums.EstadoWeb
 }
 
+export type EnumEstadoPagoWebFieldUpdateOperationsInput = {
+  set?: $Enums.EstadoPagoWeb
+}
+
 export type VentasWebCreateNestedOneWithoutDetallesventawebInput = {
   create?: Prisma.XOR<Prisma.VentasWebCreateWithoutDetallesventawebInput, Prisma.VentasWebUncheckedCreateWithoutDetallesventawebInput>
   connectOrCreate?: Prisma.VentasWebCreateOrConnectWithoutDetallesventawebInput
@@ -442,19 +519,41 @@ export type VentasWebUpdateOneRequiredWithoutDetallesventawebNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.VentasWebUpdateToOneWithWhereWithoutDetallesventawebInput, Prisma.VentasWebUpdateWithoutDetallesventawebInput>, Prisma.VentasWebUncheckedUpdateWithoutDetallesventawebInput>
 }
 
+export type VentasWebCreateNestedOneWithoutDevolucionInput = {
+  create?: Prisma.XOR<Prisma.VentasWebCreateWithoutDevolucionInput, Prisma.VentasWebUncheckedCreateWithoutDevolucionInput>
+  connectOrCreate?: Prisma.VentasWebCreateOrConnectWithoutDevolucionInput
+  connect?: Prisma.VentasWebWhereUniqueInput
+}
+
+export type VentasWebUpdateOneRequiredWithoutDevolucionNestedInput = {
+  create?: Prisma.XOR<Prisma.VentasWebCreateWithoutDevolucionInput, Prisma.VentasWebUncheckedCreateWithoutDevolucionInput>
+  connectOrCreate?: Prisma.VentasWebCreateOrConnectWithoutDevolucionInput
+  upsert?: Prisma.VentasWebUpsertWithoutDevolucionInput
+  connect?: Prisma.VentasWebWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.VentasWebUpdateToOneWithWhereWithoutDevolucionInput, Prisma.VentasWebUpdateWithoutDevolucionInput>, Prisma.VentasWebUncheckedUpdateWithoutDevolucionInput>
+}
+
 export type VentasWebCreateWithoutUsuarioInput = {
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutVentaswebInput
+  devolucion?: Prisma.DevolucionesWebCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebUncheckedCreateWithoutUsuarioInput = {
   id?: number
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutVentaswebInput
+  devolucion?: Prisma.DevolucionesWebUncheckedCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebCreateOrConnectWithoutUsuarioInput = {
@@ -490,23 +589,34 @@ export type VentasWebScalarWhereInput = {
   id?: Prisma.IntFilter<"VentasWeb"> | number
   fecha?: Prisma.DateTimeFilter<"VentasWeb"> | Date | string
   total?: Prisma.DecimalFilter<"VentasWeb"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFilter<"VentasWeb"> | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFilter<"VentasWeb"> | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFilter<"VentasWeb"> | number
+  id_pago_externo?: Prisma.StringNullableFilter<"VentasWeb"> | string | null
+  estado?: Prisma.EnumEstadoVentaFilter<"VentasWeb"> | $Enums.EstadoVenta
 }
 
 export type VentasWebCreateWithoutDetallesventawebInput = {
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
   usuario: Prisma.UserCreateNestedOneWithoutVentaWebInput
+  devolucion?: Prisma.DevolucionesWebCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebUncheckedCreateWithoutDetallesventawebInput = {
   id?: number
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
   id_usuario: number
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
+  devolucion?: Prisma.DevolucionesWebUncheckedCreateNestedManyWithoutVentawebInput
 }
 
 export type VentasWebCreateOrConnectWithoutDetallesventawebInput = {
@@ -528,45 +638,129 @@ export type VentasWebUpdateToOneWithWhereWithoutDetallesventawebInput = {
 export type VentasWebUpdateWithoutDetallesventawebInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
   usuario?: Prisma.UserUpdateOneRequiredWithoutVentaWebNestedInput
+  devolucion?: Prisma.DevolucionesWebUpdateManyWithoutVentawebNestedInput
 }
 
 export type VentasWebUncheckedUpdateWithoutDetallesventawebInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
   id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
+  devolucion?: Prisma.DevolucionesWebUncheckedUpdateManyWithoutVentawebNestedInput
+}
+
+export type VentasWebCreateWithoutDevolucionInput = {
+  fecha?: Date | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
+  detallesventaweb?: Prisma.DetallesVentaWebCreateNestedManyWithoutVentaswebInput
+  usuario: Prisma.UserCreateNestedOneWithoutVentaWebInput
+}
+
+export type VentasWebUncheckedCreateWithoutDevolucionInput = {
+  id?: number
+  fecha?: Date | string
+  total: runtime.Decimal | runtime.DecimalJsLike | number | string
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_usuario: number
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
+  detallesventaweb?: Prisma.DetallesVentaWebUncheckedCreateNestedManyWithoutVentaswebInput
+}
+
+export type VentasWebCreateOrConnectWithoutDevolucionInput = {
+  where: Prisma.VentasWebWhereUniqueInput
+  create: Prisma.XOR<Prisma.VentasWebCreateWithoutDevolucionInput, Prisma.VentasWebUncheckedCreateWithoutDevolucionInput>
+}
+
+export type VentasWebUpsertWithoutDevolucionInput = {
+  update: Prisma.XOR<Prisma.VentasWebUpdateWithoutDevolucionInput, Prisma.VentasWebUncheckedUpdateWithoutDevolucionInput>
+  create: Prisma.XOR<Prisma.VentasWebCreateWithoutDevolucionInput, Prisma.VentasWebUncheckedCreateWithoutDevolucionInput>
+  where?: Prisma.VentasWebWhereInput
+}
+
+export type VentasWebUpdateToOneWithWhereWithoutDevolucionInput = {
+  where?: Prisma.VentasWebWhereInput
+  data: Prisma.XOR<Prisma.VentasWebUpdateWithoutDevolucionInput, Prisma.VentasWebUncheckedUpdateWithoutDevolucionInput>
+}
+
+export type VentasWebUpdateWithoutDevolucionInput = {
+  fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
+  detallesventaweb?: Prisma.DetallesVentaWebUpdateManyWithoutVentaswebNestedInput
+  usuario?: Prisma.UserUpdateOneRequiredWithoutVentaWebNestedInput
+}
+
+export type VentasWebUncheckedUpdateWithoutDevolucionInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_usuario?: Prisma.IntFieldUpdateOperationsInput | number
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
+  detallesventaweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutVentaswebNestedInput
 }
 
 export type VentasWebCreateManyUsuarioInput = {
   id?: number
   fecha?: Date | string
   total: runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado: $Enums.EstadoWeb
+  estadoweb?: $Enums.EstadoWeb
+  estado_pago?: $Enums.EstadoPagoWeb
+  id_pago_externo?: string | null
+  estado?: $Enums.EstadoVenta
 }
 
 export type VentasWebUpdateWithoutUsuarioInput = {
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUpdateManyWithoutVentaswebNestedInput
+  devolucion?: Prisma.DevolucionesWebUpdateManyWithoutVentawebNestedInput
 }
 
 export type VentasWebUncheckedUpdateWithoutUsuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
   detallesventaweb?: Prisma.DetallesVentaWebUncheckedUpdateManyWithoutVentaswebNestedInput
+  devolucion?: Prisma.DevolucionesWebUncheckedUpdateManyWithoutVentawebNestedInput
 }
 
 export type VentasWebUncheckedUpdateManyWithoutUsuarioInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   fecha?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   total?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
-  estado?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estadoweb?: Prisma.EnumEstadoWebFieldUpdateOperationsInput | $Enums.EstadoWeb
+  estado_pago?: Prisma.EnumEstadoPagoWebFieldUpdateOperationsInput | $Enums.EstadoPagoWeb
+  id_pago_externo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  estado?: Prisma.EnumEstadoVentaFieldUpdateOperationsInput | $Enums.EstadoVenta
 }
 
 
@@ -576,10 +770,12 @@ export type VentasWebUncheckedUpdateManyWithoutUsuarioInput = {
 
 export type VentasWebCountOutputType = {
   detallesventaweb: number
+  devolucion: number
 }
 
 export type VentasWebCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   detallesventaweb?: boolean | VentasWebCountOutputTypeCountDetallesventawebArgs
+  devolucion?: boolean | VentasWebCountOutputTypeCountDevolucionArgs
 }
 
 /**
@@ -599,15 +795,26 @@ export type VentasWebCountOutputTypeCountDetallesventawebArgs<ExtArgs extends ru
   where?: Prisma.DetallesVentaWebWhereInput
 }
 
+/**
+ * VentasWebCountOutputType without action
+ */
+export type VentasWebCountOutputTypeCountDevolucionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DevolucionesWebWhereInput
+}
+
 
 export type VentasWebSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   fecha?: boolean
   total?: boolean
-  estado?: boolean
+  estadoweb?: boolean
+  estado_pago?: boolean
   id_usuario?: boolean
+  id_pago_externo?: boolean
+  estado?: boolean
   detallesventaweb?: boolean | Prisma.VentasWeb$detallesventawebArgs<ExtArgs>
   usuario?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  devolucion?: boolean | Prisma.VentasWeb$devolucionArgs<ExtArgs>
   _count?: boolean | Prisma.VentasWebCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ventasWeb"]>
 
@@ -615,8 +822,11 @@ export type VentasWebSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   fecha?: boolean
   total?: boolean
-  estado?: boolean
+  estadoweb?: boolean
+  estado_pago?: boolean
   id_usuario?: boolean
+  id_pago_externo?: boolean
+  estado?: boolean
   usuario?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ventasWeb"]>
 
@@ -624,8 +834,11 @@ export type VentasWebSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   fecha?: boolean
   total?: boolean
-  estado?: boolean
+  estadoweb?: boolean
+  estado_pago?: boolean
   id_usuario?: boolean
+  id_pago_externo?: boolean
+  estado?: boolean
   usuario?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["ventasWeb"]>
 
@@ -633,14 +846,18 @@ export type VentasWebSelectScalar = {
   id?: boolean
   fecha?: boolean
   total?: boolean
-  estado?: boolean
+  estadoweb?: boolean
+  estado_pago?: boolean
   id_usuario?: boolean
+  id_pago_externo?: boolean
+  estado?: boolean
 }
 
-export type VentasWebOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "total" | "estado" | "id_usuario", ExtArgs["result"]["ventasWeb"]>
+export type VentasWebOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fecha" | "total" | "estadoweb" | "estado_pago" | "id_usuario" | "id_pago_externo" | "estado", ExtArgs["result"]["ventasWeb"]>
 export type VentasWebInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   detallesventaweb?: boolean | Prisma.VentasWeb$detallesventawebArgs<ExtArgs>
   usuario?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  devolucion?: boolean | Prisma.VentasWeb$devolucionArgs<ExtArgs>
   _count?: boolean | Prisma.VentasWebCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type VentasWebIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -655,13 +872,17 @@ export type $VentasWebPayload<ExtArgs extends runtime.Types.Extensions.InternalA
   objects: {
     detallesventaweb: Prisma.$DetallesVentaWebPayload<ExtArgs>[]
     usuario: Prisma.$UserPayload<ExtArgs>
+    devolucion: Prisma.$DevolucionesWebPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     fecha: Date
     total: runtime.Decimal
-    estado: $Enums.EstadoWeb
+    estadoweb: $Enums.EstadoWeb
+    estado_pago: $Enums.EstadoPagoWeb
     id_usuario: number
+    id_pago_externo: string | null
+    estado: $Enums.EstadoVenta
   }, ExtArgs["result"]["ventasWeb"]>
   composites: {}
 }
@@ -1058,6 +1279,7 @@ export interface Prisma__VentasWebClient<T, Null = never, ExtArgs extends runtim
   readonly [Symbol.toStringTag]: "PrismaPromise"
   detallesventaweb<T extends Prisma.VentasWeb$detallesventawebArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VentasWeb$detallesventawebArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DetallesVentaWebPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usuario<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  devolucion<T extends Prisma.VentasWeb$devolucionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.VentasWeb$devolucionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DevolucionesWebPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1090,8 +1312,11 @@ export interface VentasWebFieldRefs {
   readonly id: Prisma.FieldRef<"VentasWeb", 'Int'>
   readonly fecha: Prisma.FieldRef<"VentasWeb", 'DateTime'>
   readonly total: Prisma.FieldRef<"VentasWeb", 'Decimal'>
-  readonly estado: Prisma.FieldRef<"VentasWeb", 'EstadoWeb'>
+  readonly estadoweb: Prisma.FieldRef<"VentasWeb", 'EstadoWeb'>
+  readonly estado_pago: Prisma.FieldRef<"VentasWeb", 'EstadoPagoWeb'>
   readonly id_usuario: Prisma.FieldRef<"VentasWeb", 'Int'>
+  readonly id_pago_externo: Prisma.FieldRef<"VentasWeb", 'String'>
+  readonly estado: Prisma.FieldRef<"VentasWeb", 'EstadoVenta'>
 }
     
 
@@ -1514,6 +1739,30 @@ export type VentasWeb$detallesventawebArgs<ExtArgs extends runtime.Types.Extensi
   take?: number
   skip?: number
   distinct?: Prisma.DetallesVentaWebScalarFieldEnum | Prisma.DetallesVentaWebScalarFieldEnum[]
+}
+
+/**
+ * VentasWeb.devolucion
+ */
+export type VentasWeb$devolucionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DevolucionesWeb
+   */
+  select?: Prisma.DevolucionesWebSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DevolucionesWeb
+   */
+  omit?: Prisma.DevolucionesWebOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DevolucionesWebInclude<ExtArgs> | null
+  where?: Prisma.DevolucionesWebWhereInput
+  orderBy?: Prisma.DevolucionesWebOrderByWithRelationInput | Prisma.DevolucionesWebOrderByWithRelationInput[]
+  cursor?: Prisma.DevolucionesWebWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DevolucionesWebScalarFieldEnum | Prisma.DevolucionesWebScalarFieldEnum[]
 }
 
 /**

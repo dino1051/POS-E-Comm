@@ -15,6 +15,8 @@ import { VentasWebModule } from './ventas-web/ventas-web.module.js';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 import { CategoriasModule } from './categorias/categorias.module.js';
+import { PosModule } from './pos/pos.module.js';
+import { SesionesCajaModule } from './sesiones-caja/sesiones-caja.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -23,13 +25,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'pos-ecomm',
-    }),
+
     PrismaModule,
     UsersModule,
     AuthModule,
@@ -39,8 +35,12 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     VentasModule,
     VentasWebModule,
     CategoriasModule,
+    PosModule,
+    SesionesCajaModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, JwtService],
+
+  controllers: [AppController],
+
+  providers: [AppService],
 })
 export class AppModule {}

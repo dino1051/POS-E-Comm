@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ArticulosService } from './articulos.service.js';
 import { CreateArticuloDto } from './dto/create-articulo.dto.js';
@@ -18,6 +19,11 @@ export class ArticulosController {
   @Post()
   create(@Body() createArticulo: CreateArticuloDto) {
     return this.articulosService.createArticulo(createArticulo);
+  }
+
+  @Get()
+  findByStock(@Query('Max') Max: string) {
+    return this.articulosService.findByStock(Max);
   }
 
   @Get()

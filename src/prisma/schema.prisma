@@ -26,9 +26,16 @@ enum EstadoWeb {
   CANCELADO
 }
 
+enum EstadoPagoWeb {
+  PENDIENTE
+  PAGADO
+  RECHAZADO
+  REEMBOLSADO
+}
+
 enum Pagos {
   EFECTIVO
-  TRAJETA
+  TARJETA
   TRANSFERENCIAQR
 }
 
@@ -36,6 +43,11 @@ enum Role {
   ADMIN
   CAJERO
   CLIENTEWEB
+}
+
+enum EstadoSesionCaja {
+  ABIERTA
+  CERRADA
 }
 
 model User {
@@ -50,6 +62,7 @@ model User {
   venta Ventas[]
   ventaWeb VentasWeb[]
   compras Compras[]
+  sesioncaja SesionCaja[]
 
   @@map("users")
 }
@@ -64,6 +77,7 @@ model Articulos {
   precioCompra Decimal @db.Decimal(10,2) @map("precio_compra")
   detallesventas DetallesVenta[]
   detallesventasweb DetallesVentaWeb[]
+  detallescompras DetallesCompra[]
   categoria    Categorias @relation(fields: [id_categoria], references: [id])
   creadoEn DateTime @default(now())
   @@map("articulos")
@@ -84,11 +98,14 @@ model Ventas {
   fecha DateTime @default(now())
   total Decimal @db.Decimal(10,2)
   id_usuario Int 
+  id_sesion_caja Int
   tipo_pago Pagos
-  detallesVenta DetallesVenta[]
-  usuario User @relation(fields:[id_usuario],references: [id])
   estado EstadoVenta @default(COMPLETADA)
+  detallesVenta DetallesVenta[]
   devolucion Devoluciones[]
+  sesionCaja SesionCaja @relation(fields: [id_sesion_caja],references: [id])
+  usuario User @relation(fields:[id_usuario],references: [id])
+  
   @@map("ventas")
 }
 
@@ -110,11 +127,15 @@ model VentasWeb {
   id Int @id @default(autoincrement())
   fecha DateTime @default(now())
   total Decimal @db.Decimal(10,2)
-  estado EstadoWeb
+  estadoweb EstadoWeb @default(PENDIENTE)
+  estado_pago     EstadoPagoWeb @default(PENDIENTE)
   id_usuario Int
+  id_pago_externo String?   @unique
   detallesventaweb DetallesVentaWeb[]
-
   usuario User @relation(fields:[id_usuario],references: [id])
+  estado EstadoVenta @default(COMPLETADA)
+  devolucion DevolucionesWeb[]
+
 
   @@map("ventas_web")
 }
@@ -125,6 +146,8 @@ model DetallesVentaWeb {
   subtotal Decimal @db.Decimal(10,2)
   id_ventaweb Int
   id_articulo Int
+  cantidadDevuelta Int @default(0) @map("cantidad_devuelta")
+  devolucionesweb DetallesDevolucionWeb[]
   ventasweb VentasWeb @relation(fields: [id_ventaweb],references: [id])
   articulo Articulos @relation(fields: [id_articulo], references: [id])
 
@@ -152,6 +175,29 @@ model DetallesDevolucion {
   detalleVenta DetallesVenta @relation(fields: [id_detalle_venta],references: [id])
 
   @@map("detalles_devolucion")
+}
+
+model DevolucionesWeb {
+  id          Int      @id @default(autoincrement())
+  fecha       DateTime @default(now())
+  total       Decimal  @db.Decimal(10,2)
+  id_ventaweb    Int
+  ventaweb VentasWeb @relation(fields: [id_ventaweb],references: [id])
+  detalles DetallesDevolucionWeb[]
+
+  @@map("devolucionesweb")
+}
+
+model DetallesDevolucionWeb {
+  id Int      @id @default(autoincrement())
+  cantidad Int
+  subtotal Decimal  @db.Decimal(10,2)
+  id_devolucion Int
+  id_detalle_venta Int
+  devolucionweb DevolucionesWeb @relation(fields: [id_devolucion],references: [id])
+  detalleVentaweb DetallesVentaWeb @relation(fields: [id_detalle_venta],references: [id])
+
+  @@map("detalles_devolucion_web")
 }
 
 model Proveedores {
@@ -184,8 +230,41 @@ model DetallesCompra {
   cantidadArticulos Int @map("cantidad_articulos")
   subtotal Decimal @db.Decimal(10,2)
   id_compra Int
-
+  id_articulo Int
   compras Compras @relation(fields: [id_compra],references: [id])
-
+  articulo Articulos @relation(fields:[id_articulo],references: [id])
   @@map("detalles_compra")
+}
+
+model Pos {
+  id Int @id @default(autoincrement())
+  numero Int @unique
+  nombre String?
+  activo Boolean @default(true)
+
+  sesionesCaja SesionCaja[]
+
+  @@map("pos")
+}
+
+model SesionCaja {
+  id Int @id @default(autoincrement())
+
+  id_pos Int
+  id_usuario_apertura Int
+
+  fecha_apertura DateTime @default(now())
+  monto_inicial Decimal @db.Decimal(10,2)
+
+  fecha_cierre DateTime?
+  monto_cierre Decimal? @db.Decimal(10,2)
+
+  estado EstadoSesionCaja @default(ABIERTA)
+
+  pos Pos @relation(fields: [id_pos], references: [id])
+  usuario User @relation(fields: [id_usuario_apertura], references: [id])
+
+  ventas Ventas[]
+
+  @@map("sesiones_caja")
 }

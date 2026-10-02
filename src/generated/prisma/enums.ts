@@ -30,6 +30,16 @@ export const EstadoWeb = {
 export type EstadoWeb = (typeof EstadoWeb)[keyof typeof EstadoWeb]
 
 
+export const EstadoPagoWeb = {
+  PENDIENTE: 'PENDIENTE',
+  PAGADO: 'PAGADO',
+  RECHAZADO: 'RECHAZADO',
+  REEMBOLSADO: 'REEMBOLSADO'
+} as const
+
+export type EstadoPagoWeb = (typeof EstadoPagoWeb)[keyof typeof EstadoPagoWeb]
+
+
 export const Pagos = {
   EFECTIVO: 'EFECTIVO',
   TRAJETA: 'TRAJETA',
@@ -46,3 +56,11 @@ export const Role = {
 } as const
 
 export type Role = (typeof Role)[keyof typeof Role]
+
+
+export const EstadoSesionCaja = {
+  ABIERTA: 'ABIERTA',
+  CERRADA: 'CERRADA'
+} as const
+
+export type EstadoSesionCaja = (typeof EstadoSesionCaja)[keyof typeof EstadoSesionCaja]

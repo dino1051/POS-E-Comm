@@ -29,7 +29,7 @@ export class UsersService {
       },
       select: {
         id: true,
-        name: true,
+        nombre: true,
         email: true,
         role: true,
         creadoEn: true,

@@ -19,10 +19,6 @@ export class CreateDetalleVentaDto {
 }
 
 export class CreateVentaDto {
-  @IsInt()
-  @IsPositive()
-  id_usuario: number;
-
   @IsEnum(Pagos)
   tipo_pago: Pagos;
   @IsArray()

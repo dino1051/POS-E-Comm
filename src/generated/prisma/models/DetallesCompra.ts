@@ -31,6 +31,7 @@ export type DetallesCompraAvgAggregateOutputType = {
   cantidadArticulos: number | null
   subtotal: runtime.Decimal | null
   id_compra: number | null
+  id_articulo: number | null
 }
 
 export type DetallesCompraSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type DetallesCompraSumAggregateOutputType = {
   cantidadArticulos: number | null
   subtotal: runtime.Decimal | null
   id_compra: number | null
+  id_articulo: number | null
 }
 
 export type DetallesCompraMinAggregateOutputType = {
@@ -45,6 +47,7 @@ export type DetallesCompraMinAggregateOutputType = {
   cantidadArticulos: number | null
   subtotal: runtime.Decimal | null
   id_compra: number | null
+  id_articulo: number | null
 }
 
 export type DetallesCompraMaxAggregateOutputType = {
@@ -52,6 +55,7 @@ export type DetallesCompraMaxAggregateOutputType = {
   cantidadArticulos: number | null
   subtotal: runtime.Decimal | null
   id_compra: number | null
+  id_articulo: number | null
 }
 
 export type DetallesCompraCountAggregateOutputType = {
@@ -59,6 +63,7 @@ export type DetallesCompraCountAggregateOutputType = {
   cantidadArticulos: number
   subtotal: number
   id_compra: number
+  id_articulo: number
   _all: number
 }
 
@@ -68,6 +73,7 @@ export type DetallesCompraAvgAggregateInputType = {
   cantidadArticulos?: true
   subtotal?: true
   id_compra?: true
+  id_articulo?: true
 }
 
 export type DetallesCompraSumAggregateInputType = {
@@ -75,6 +81,7 @@ export type DetallesCompraSumAggregateInputType = {
   cantidadArticulos?: true
   subtotal?: true
   id_compra?: true
+  id_articulo?: true
 }
 
 export type DetallesCompraMinAggregateInputType = {
@@ -82,6 +89,7 @@ export type DetallesCompraMinAggregateInputType = {
   cantidadArticulos?: true
   subtotal?: true
   id_compra?: true
+  id_articulo?: true
 }
 
 export type DetallesCompraMaxAggregateInputType = {
@@ -89,6 +97,7 @@ export type DetallesCompraMaxAggregateInputType = {
   cantidadArticulos?: true
   subtotal?: true
   id_compra?: true
+  id_articulo?: true
 }
 
 export type DetallesCompraCountAggregateInputType = {
@@ -96,6 +105,7 @@ export type DetallesCompraCountAggregateInputType = {
   cantidadArticulos?: true
   subtotal?: true
   id_compra?: true
+  id_articulo?: true
   _all?: true
 }
 
@@ -190,6 +200,7 @@ export type DetallesCompraGroupByOutputType = {
   cantidadArticulos: number
   subtotal: runtime.Decimal
   id_compra: number
+  id_articulo: number
   _count: DetallesCompraCountAggregateOutputType | null
   _avg: DetallesCompraAvgAggregateOutputType | null
   _sum: DetallesCompraSumAggregateOutputType | null
@@ -220,7 +231,9 @@ export type DetallesCompraWhereInput = {
   cantidadArticulos?: Prisma.IntFilter<"DetallesCompra"> | number
   subtotal?: Prisma.DecimalFilter<"DetallesCompra"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra?: Prisma.IntFilter<"DetallesCompra"> | number
+  id_articulo?: Prisma.IntFilter<"DetallesCompra"> | number
   compras?: Prisma.XOR<Prisma.ComprasScalarRelationFilter, Prisma.ComprasWhereInput>
+  articulo?: Prisma.XOR<Prisma.ArticulosScalarRelationFilter, Prisma.ArticulosWhereInput>
 }
 
 export type DetallesCompraOrderByWithRelationInput = {
@@ -228,7 +241,9 @@ export type DetallesCompraOrderByWithRelationInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
   compras?: Prisma.ComprasOrderByWithRelationInput
+  articulo?: Prisma.ArticulosOrderByWithRelationInput
 }
 
 export type DetallesCompraWhereUniqueInput = Prisma.AtLeast<{
@@ -239,7 +254,9 @@ export type DetallesCompraWhereUniqueInput = Prisma.AtLeast<{
   cantidadArticulos?: Prisma.IntFilter<"DetallesCompra"> | number
   subtotal?: Prisma.DecimalFilter<"DetallesCompra"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra?: Prisma.IntFilter<"DetallesCompra"> | number
+  id_articulo?: Prisma.IntFilter<"DetallesCompra"> | number
   compras?: Prisma.XOR<Prisma.ComprasScalarRelationFilter, Prisma.ComprasWhereInput>
+  articulo?: Prisma.XOR<Prisma.ArticulosScalarRelationFilter, Prisma.ArticulosWhereInput>
 }, "id">
 
 export type DetallesCompraOrderByWithAggregationInput = {
@@ -247,6 +264,7 @@ export type DetallesCompraOrderByWithAggregationInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
   _count?: Prisma.DetallesCompraCountOrderByAggregateInput
   _avg?: Prisma.DetallesCompraAvgOrderByAggregateInput
   _max?: Prisma.DetallesCompraMaxOrderByAggregateInput
@@ -262,12 +280,14 @@ export type DetallesCompraScalarWhereWithAggregatesInput = {
   cantidadArticulos?: Prisma.IntWithAggregatesFilter<"DetallesCompra"> | number
   subtotal?: Prisma.DecimalWithAggregatesFilter<"DetallesCompra"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra?: Prisma.IntWithAggregatesFilter<"DetallesCompra"> | number
+  id_articulo?: Prisma.IntWithAggregatesFilter<"DetallesCompra"> | number
 }
 
 export type DetallesCompraCreateInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   compras: Prisma.ComprasCreateNestedOneWithoutDetallescompraInput
+  articulo: Prisma.ArticulosCreateNestedOneWithoutDetallescomprasInput
 }
 
 export type DetallesCompraUncheckedCreateInput = {
@@ -275,12 +295,14 @@ export type DetallesCompraUncheckedCreateInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra: number
+  id_articulo: number
 }
 
 export type DetallesCompraUpdateInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   compras?: Prisma.ComprasUpdateOneRequiredWithoutDetallescompraNestedInput
+  articulo?: Prisma.ArticulosUpdateOneRequiredWithoutDetallescomprasNestedInput
 }
 
 export type DetallesCompraUncheckedUpdateInput = {
@@ -288,6 +310,7 @@ export type DetallesCompraUncheckedUpdateInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra?: Prisma.IntFieldUpdateOperationsInput | number
+  id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesCompraCreateManyInput = {
@@ -295,6 +318,7 @@ export type DetallesCompraCreateManyInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra: number
+  id_articulo: number
 }
 
 export type DetallesCompraUpdateManyMutationInput = {
@@ -307,6 +331,7 @@ export type DetallesCompraUncheckedUpdateManyInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   id_compra?: Prisma.IntFieldUpdateOperationsInput | number
+  id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesCompraListRelationFilter = {
@@ -324,6 +349,7 @@ export type DetallesCompraCountOrderByAggregateInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
 }
 
 export type DetallesCompraAvgOrderByAggregateInput = {
@@ -331,6 +357,7 @@ export type DetallesCompraAvgOrderByAggregateInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
 }
 
 export type DetallesCompraMaxOrderByAggregateInput = {
@@ -338,6 +365,7 @@ export type DetallesCompraMaxOrderByAggregateInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
 }
 
 export type DetallesCompraMinOrderByAggregateInput = {
@@ -345,6 +373,7 @@ export type DetallesCompraMinOrderByAggregateInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
 }
 
 export type DetallesCompraSumOrderByAggregateInput = {
@@ -352,6 +381,49 @@ export type DetallesCompraSumOrderByAggregateInput = {
   cantidadArticulos?: Prisma.SortOrder
   subtotal?: Prisma.SortOrder
   id_compra?: Prisma.SortOrder
+  id_articulo?: Prisma.SortOrder
+}
+
+export type DetallesCompraCreateNestedManyWithoutArticuloInput = {
+  create?: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput> | Prisma.DetallesCompraCreateWithoutArticuloInput[] | Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput[]
+  connectOrCreate?: Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput | Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput[]
+  createMany?: Prisma.DetallesCompraCreateManyArticuloInputEnvelope
+  connect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+}
+
+export type DetallesCompraUncheckedCreateNestedManyWithoutArticuloInput = {
+  create?: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput> | Prisma.DetallesCompraCreateWithoutArticuloInput[] | Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput[]
+  connectOrCreate?: Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput | Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput[]
+  createMany?: Prisma.DetallesCompraCreateManyArticuloInputEnvelope
+  connect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+}
+
+export type DetallesCompraUpdateManyWithoutArticuloNestedInput = {
+  create?: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput> | Prisma.DetallesCompraCreateWithoutArticuloInput[] | Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput[]
+  connectOrCreate?: Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput | Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput[]
+  upsert?: Prisma.DetallesCompraUpsertWithWhereUniqueWithoutArticuloInput | Prisma.DetallesCompraUpsertWithWhereUniqueWithoutArticuloInput[]
+  createMany?: Prisma.DetallesCompraCreateManyArticuloInputEnvelope
+  set?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  disconnect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  delete?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  connect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  update?: Prisma.DetallesCompraUpdateWithWhereUniqueWithoutArticuloInput | Prisma.DetallesCompraUpdateWithWhereUniqueWithoutArticuloInput[]
+  updateMany?: Prisma.DetallesCompraUpdateManyWithWhereWithoutArticuloInput | Prisma.DetallesCompraUpdateManyWithWhereWithoutArticuloInput[]
+  deleteMany?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
+}
+
+export type DetallesCompraUncheckedUpdateManyWithoutArticuloNestedInput = {
+  create?: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput> | Prisma.DetallesCompraCreateWithoutArticuloInput[] | Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput[]
+  connectOrCreate?: Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput | Prisma.DetallesCompraCreateOrConnectWithoutArticuloInput[]
+  upsert?: Prisma.DetallesCompraUpsertWithWhereUniqueWithoutArticuloInput | Prisma.DetallesCompraUpsertWithWhereUniqueWithoutArticuloInput[]
+  createMany?: Prisma.DetallesCompraCreateManyArticuloInputEnvelope
+  set?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  disconnect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  delete?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  connect?: Prisma.DetallesCompraWhereUniqueInput | Prisma.DetallesCompraWhereUniqueInput[]
+  update?: Prisma.DetallesCompraUpdateWithWhereUniqueWithoutArticuloInput | Prisma.DetallesCompraUpdateWithWhereUniqueWithoutArticuloInput[]
+  updateMany?: Prisma.DetallesCompraUpdateManyWithWhereWithoutArticuloInput | Prisma.DetallesCompraUpdateManyWithWhereWithoutArticuloInput[]
+  deleteMany?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
 }
 
 export type DetallesCompraCreateNestedManyWithoutComprasInput = {
@@ -396,15 +468,67 @@ export type DetallesCompraUncheckedUpdateManyWithoutComprasNestedInput = {
   deleteMany?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
 }
 
+export type DetallesCompraCreateWithoutArticuloInput = {
+  cantidadArticulos: number
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  compras: Prisma.ComprasCreateNestedOneWithoutDetallescompraInput
+}
+
+export type DetallesCompraUncheckedCreateWithoutArticuloInput = {
+  id?: number
+  cantidadArticulos: number
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_compra: number
+}
+
+export type DetallesCompraCreateOrConnectWithoutArticuloInput = {
+  where: Prisma.DetallesCompraWhereUniqueInput
+  create: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput>
+}
+
+export type DetallesCompraCreateManyArticuloInputEnvelope = {
+  data: Prisma.DetallesCompraCreateManyArticuloInput | Prisma.DetallesCompraCreateManyArticuloInput[]
+  skipDuplicates?: boolean
+}
+
+export type DetallesCompraUpsertWithWhereUniqueWithoutArticuloInput = {
+  where: Prisma.DetallesCompraWhereUniqueInput
+  update: Prisma.XOR<Prisma.DetallesCompraUpdateWithoutArticuloInput, Prisma.DetallesCompraUncheckedUpdateWithoutArticuloInput>
+  create: Prisma.XOR<Prisma.DetallesCompraCreateWithoutArticuloInput, Prisma.DetallesCompraUncheckedCreateWithoutArticuloInput>
+}
+
+export type DetallesCompraUpdateWithWhereUniqueWithoutArticuloInput = {
+  where: Prisma.DetallesCompraWhereUniqueInput
+  data: Prisma.XOR<Prisma.DetallesCompraUpdateWithoutArticuloInput, Prisma.DetallesCompraUncheckedUpdateWithoutArticuloInput>
+}
+
+export type DetallesCompraUpdateManyWithWhereWithoutArticuloInput = {
+  where: Prisma.DetallesCompraScalarWhereInput
+  data: Prisma.XOR<Prisma.DetallesCompraUpdateManyMutationInput, Prisma.DetallesCompraUncheckedUpdateManyWithoutArticuloInput>
+}
+
+export type DetallesCompraScalarWhereInput = {
+  AND?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
+  OR?: Prisma.DetallesCompraScalarWhereInput[]
+  NOT?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
+  id?: Prisma.IntFilter<"DetallesCompra"> | number
+  cantidadArticulos?: Prisma.IntFilter<"DetallesCompra"> | number
+  subtotal?: Prisma.DecimalFilter<"DetallesCompra"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_compra?: Prisma.IntFilter<"DetallesCompra"> | number
+  id_articulo?: Prisma.IntFilter<"DetallesCompra"> | number
+}
+
 export type DetallesCompraCreateWithoutComprasInput = {
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  articulo: Prisma.ArticulosCreateNestedOneWithoutDetallescomprasInput
 }
 
 export type DetallesCompraUncheckedCreateWithoutComprasInput = {
   id?: number
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_articulo: number
 }
 
 export type DetallesCompraCreateOrConnectWithoutComprasInput = {
@@ -433,37 +557,58 @@ export type DetallesCompraUpdateManyWithWhereWithoutComprasInput = {
   data: Prisma.XOR<Prisma.DetallesCompraUpdateManyMutationInput, Prisma.DetallesCompraUncheckedUpdateManyWithoutComprasInput>
 }
 
-export type DetallesCompraScalarWhereInput = {
-  AND?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
-  OR?: Prisma.DetallesCompraScalarWhereInput[]
-  NOT?: Prisma.DetallesCompraScalarWhereInput | Prisma.DetallesCompraScalarWhereInput[]
-  id?: Prisma.IntFilter<"DetallesCompra"> | number
-  cantidadArticulos?: Prisma.IntFilter<"DetallesCompra"> | number
-  subtotal?: Prisma.DecimalFilter<"DetallesCompra"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  id_compra?: Prisma.IntFilter<"DetallesCompra"> | number
+export type DetallesCompraCreateManyArticuloInput = {
+  id?: number
+  cantidadArticulos: number
+  subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_compra: number
+}
+
+export type DetallesCompraUpdateWithoutArticuloInput = {
+  cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  compras?: Prisma.ComprasUpdateOneRequiredWithoutDetallescompraNestedInput
+}
+
+export type DetallesCompraUncheckedUpdateWithoutArticuloInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_compra?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type DetallesCompraUncheckedUpdateManyWithoutArticuloInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
+  subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_compra?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesCompraCreateManyComprasInput = {
   id?: number
   cantidadArticulos: number
   subtotal: runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_articulo: number
 }
 
 export type DetallesCompraUpdateWithoutComprasInput = {
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  articulo?: Prisma.ArticulosUpdateOneRequiredWithoutDetallescomprasNestedInput
 }
 
 export type DetallesCompraUncheckedUpdateWithoutComprasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type DetallesCompraUncheckedUpdateManyWithoutComprasInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   cantidadArticulos?: Prisma.IntFieldUpdateOperationsInput | number
   subtotal?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  id_articulo?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -473,7 +618,9 @@ export type DetallesCompraSelect<ExtArgs extends runtime.Types.Extensions.Intern
   cantidadArticulos?: boolean
   subtotal?: boolean
   id_compra?: boolean
+  id_articulo?: boolean
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesCompra"]>
 
 export type DetallesCompraSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -481,7 +628,9 @@ export type DetallesCompraSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   cantidadArticulos?: boolean
   subtotal?: boolean
   id_compra?: boolean
+  id_articulo?: boolean
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesCompra"]>
 
 export type DetallesCompraSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -489,7 +638,9 @@ export type DetallesCompraSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   cantidadArticulos?: boolean
   subtotal?: boolean
   id_compra?: boolean
+  id_articulo?: boolean
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["detallesCompra"]>
 
 export type DetallesCompraSelectScalar = {
@@ -497,29 +648,35 @@ export type DetallesCompraSelectScalar = {
   cantidadArticulos?: boolean
   subtotal?: boolean
   id_compra?: boolean
+  id_articulo?: boolean
 }
 
-export type DetallesCompraOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cantidadArticulos" | "subtotal" | "id_compra", ExtArgs["result"]["detallesCompra"]>
+export type DetallesCompraOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "cantidadArticulos" | "subtotal" | "id_compra" | "id_articulo", ExtArgs["result"]["detallesCompra"]>
 export type DetallesCompraInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }
 export type DetallesCompraIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }
 export type DetallesCompraIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   compras?: boolean | Prisma.ComprasDefaultArgs<ExtArgs>
+  articulo?: boolean | Prisma.ArticulosDefaultArgs<ExtArgs>
 }
 
 export type $DetallesCompraPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DetallesCompra"
   objects: {
     compras: Prisma.$ComprasPayload<ExtArgs>
+    articulo: Prisma.$ArticulosPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     cantidadArticulos: number
     subtotal: runtime.Decimal
     id_compra: number
+    id_articulo: number
   }, ExtArgs["result"]["detallesCompra"]>
   composites: {}
 }
@@ -915,6 +1072,7 @@ readonly fields: DetallesCompraFieldRefs;
 export interface Prisma__DetallesCompraClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   compras<T extends Prisma.ComprasDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ComprasDefaultArgs<ExtArgs>>): Prisma.Prisma__ComprasClient<runtime.Types.Result.GetResult<Prisma.$ComprasPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  articulo<T extends Prisma.ArticulosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticulosDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticulosClient<runtime.Types.Result.GetResult<Prisma.$ArticulosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -948,6 +1106,7 @@ export interface DetallesCompraFieldRefs {
   readonly cantidadArticulos: Prisma.FieldRef<"DetallesCompra", 'Int'>
   readonly subtotal: Prisma.FieldRef<"DetallesCompra", 'Decimal'>
   readonly id_compra: Prisma.FieldRef<"DetallesCompra", 'Int'>
+  readonly id_articulo: Prisma.FieldRef<"DetallesCompra", 'Int'>
 }
     
 

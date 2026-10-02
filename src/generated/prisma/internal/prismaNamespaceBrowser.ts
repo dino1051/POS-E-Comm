@@ -60,9 +60,13 @@ export const ModelName = {
   DetallesVentaWeb: 'DetallesVentaWeb',
   Devoluciones: 'Devoluciones',
   DetallesDevolucion: 'DetallesDevolucion',
+  DevolucionesWeb: 'DevolucionesWeb',
+  DetallesDevolucionWeb: 'DetallesDevolucionWeb',
   Proveedores: 'Proveedores',
   Compras: 'Compras',
-  DetallesCompra: 'DetallesCompra'
+  DetallesCompra: 'DetallesCompra',
+  Pos: 'Pos',
+  SesionCaja: 'SesionCaja'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -123,6 +127,7 @@ export const VentasScalarFieldEnum = {
   fecha: 'fecha',
   total: 'total',
   id_usuario: 'id_usuario',
+  id_sesion_caja: 'id_sesion_caja',
   tipo_pago: 'tipo_pago',
   estado: 'estado'
 } as const
@@ -146,8 +151,11 @@ export const VentasWebScalarFieldEnum = {
   id: 'id',
   fecha: 'fecha',
   total: 'total',
-  estado: 'estado',
-  id_usuario: 'id_usuario'
+  estadoweb: 'estadoweb',
+  estado_pago: 'estado_pago',
+  id_usuario: 'id_usuario',
+  id_pago_externo: 'id_pago_externo',
+  estado: 'estado'
 } as const
 
 export type VentasWebScalarFieldEnum = (typeof VentasWebScalarFieldEnum)[keyof typeof VentasWebScalarFieldEnum]
@@ -158,7 +166,8 @@ export const DetallesVentaWebScalarFieldEnum = {
   cantidadArticulos: 'cantidadArticulos',
   subtotal: 'subtotal',
   id_ventaweb: 'id_ventaweb',
-  id_articulo: 'id_articulo'
+  id_articulo: 'id_articulo',
+  cantidadDevuelta: 'cantidadDevuelta'
 } as const
 
 export type DetallesVentaWebScalarFieldEnum = (typeof DetallesVentaWebScalarFieldEnum)[keyof typeof DetallesVentaWebScalarFieldEnum]
@@ -183,6 +192,27 @@ export const DetallesDevolucionScalarFieldEnum = {
 } as const
 
 export type DetallesDevolucionScalarFieldEnum = (typeof DetallesDevolucionScalarFieldEnum)[keyof typeof DetallesDevolucionScalarFieldEnum]
+
+
+export const DevolucionesWebScalarFieldEnum = {
+  id: 'id',
+  fecha: 'fecha',
+  total: 'total',
+  id_ventaweb: 'id_ventaweb'
+} as const
+
+export type DevolucionesWebScalarFieldEnum = (typeof DevolucionesWebScalarFieldEnum)[keyof typeof DevolucionesWebScalarFieldEnum]
+
+
+export const DetallesDevolucionWebScalarFieldEnum = {
+  id: 'id',
+  cantidad: 'cantidad',
+  subtotal: 'subtotal',
+  id_devolucion: 'id_devolucion',
+  id_detalle_venta: 'id_detalle_venta'
+} as const
+
+export type DetallesDevolucionWebScalarFieldEnum = (typeof DetallesDevolucionWebScalarFieldEnum)[keyof typeof DetallesDevolucionWebScalarFieldEnum]
 
 
 export const ProveedoresScalarFieldEnum = {
@@ -211,10 +241,35 @@ export const DetallesCompraScalarFieldEnum = {
   id: 'id',
   cantidadArticulos: 'cantidadArticulos',
   subtotal: 'subtotal',
-  id_compra: 'id_compra'
+  id_compra: 'id_compra',
+  id_articulo: 'id_articulo'
 } as const
 
 export type DetallesCompraScalarFieldEnum = (typeof DetallesCompraScalarFieldEnum)[keyof typeof DetallesCompraScalarFieldEnum]
+
+
+export const PosScalarFieldEnum = {
+  id: 'id',
+  numero: 'numero',
+  nombre: 'nombre',
+  activo: 'activo'
+} as const
+
+export type PosScalarFieldEnum = (typeof PosScalarFieldEnum)[keyof typeof PosScalarFieldEnum]
+
+
+export const SesionCajaScalarFieldEnum = {
+  id: 'id',
+  id_pos: 'id_pos',
+  id_usuario_apertura: 'id_usuario_apertura',
+  fecha_apertura: 'fecha_apertura',
+  monto_inicial: 'monto_inicial',
+  fecha_cierre: 'fecha_cierre',
+  monto_cierre: 'monto_cierre',
+  estado: 'estado'
+} as const
+
+export type SesionCajaScalarFieldEnum = (typeof SesionCajaScalarFieldEnum)[keyof typeof SesionCajaScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -11,8 +11,19 @@ import { DevolucionVentaDto } from './dto/create-devolucion.dto.js';
 export class VentasService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createVenta(createVentaDto: CreateVentaDto) {
+  async createVenta(createVentaDto: CreateVentaDto, id: number) {
     return this.prisma.$transaction(async (tx) => {
+      const sesionCaja = await tx.sesionCaja.findFirst({
+        where: {
+          id_usuario_apertura: id,
+          estado: 'ABIERTA',
+        },
+      });
+
+      if (!sesionCaja) {
+        throw new BadRequestException('No tienes una sesión de caja abierta');
+      }
+
       let total = 0;
 
       const detalles = [];
@@ -61,7 +72,8 @@ export class VentasService {
 
       const venta = await tx.ventas.create({
         data: {
-          id_usuario: createVentaDto.id_usuario,
+          id_usuario: id,
+          id_sesion_caja: sesionCaja.id,
           tipo_pago: createVentaDto.tipo_pago,
           total,
 
@@ -70,14 +82,32 @@ export class VentasService {
           },
         },
 
-        include: {
+        select: {
+          fecha: true,
+          total: true,
+          tipo_pago: true,
           detallesVenta: {
-            include: {
-              articulo: true,
+            select: {
+              cantidadArticulos: true,
+              subtotal: true,
+              articulo: {
+                select: {
+                  nombre: true,
+                  precioVenta: true,
+                },
+              },
             },
           },
-
-          usuario: true,
+          usuario: {
+            select: {
+              nombre: true,
+            },
+          },
+          sesionCaja: {
+            select: {
+              id_pos: true,
+            },
+          },
         },
       });
 
@@ -87,6 +117,28 @@ export class VentasService {
   async findVenta(id: number) {
     return this.prisma.ventas.findUnique({
       where: { id },
+      include: {
+        usuario: {
+          select: {
+            nombre: true,
+            apellido: true,
+          },
+        },
+      },
+      omit: {
+        id_usuario: true,
+      },
+    });
+  }
+  async findAllVentas() {
+    return this.prisma.ventas.findMany({ orderBy: { id: 'asc' } });
+  }
+  async findMisVentas(id_usuario: number) {
+    return this.prisma.ventas.findMany({
+      where: { id_usuario },
+      include: {
+        usuario: true,
+      },
     });
   }
 
@@ -233,5 +285,78 @@ export class VentasService {
         },
       });
     });
+  }
+
+  async reporteMensual(mes: number, anio: number) {
+    if (!Number.isInteger(mes) || mes < 1 || mes > 12) {
+      throw new BadRequestException('El mes debe estar entre 1 y 12');
+    }
+
+    if (!Number.isInteger(anio) || anio < 2000 || anio > 2100) {
+      throw new BadRequestException('Año inválido');
+    }
+
+    const fechaInicio = new Date(anio, mes - 1, 1);
+    const fechaFin = new Date(anio, mes, 1);
+
+    const where = {
+      fecha: {
+        gte: fechaInicio,
+        lt: fechaFin,
+      },
+    };
+
+    const resumen = await this.prisma.ventas.aggregate({
+      where,
+      _count: {
+        _all: true,
+      },
+      _sum: {
+        total: true,
+      },
+    });
+
+    const ventasPorPago = await this.prisma.ventas.groupBy({
+      by: ['tipo_pago'],
+      where,
+      _count: {
+        _all: true,
+      },
+      _sum: {
+        total: true,
+      },
+    });
+
+    const ventas = await this.prisma.ventas.findMany({
+      where,
+      select: {
+        id: true,
+        fecha: true,
+        total: true,
+        tipo_pago: true,
+      },
+      orderBy: {
+        fecha: 'desc',
+      },
+    });
+
+    return {
+      periodo: {
+        mes,
+        anio,
+        fechaInicio,
+        fechaFin,
+      },
+      resumen: {
+        cantidadVentas: resumen._count._all,
+        totalVendido: resumen._sum.total ?? 0,
+      },
+      ventasPorPago: ventasPorPago.map((grupo) => ({
+        tipoPago: grupo.tipo_pago,
+        cantidadVentas: grupo._count._all,
+        totalVendido: grupo._sum.total ?? 0,
+      })),
+      ventas,
+    };
   }
 }
