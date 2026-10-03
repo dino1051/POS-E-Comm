@@ -108,10 +108,6 @@ export class VentasWebService {
 
     const responseText = await response.text();
 
-    console.log('🔥 MOCKPAY STATUS:', response.status);
-    console.log('🔥 MOCKPAY STATUS TEXT:', response.statusText);
-    console.log('🔥 MOCKPAY BODY:', responseText);
-
     if (!response.ok) {
       throw new BadGatewayException(
         `MockPay respondió con HTTP ${response.status}`,
