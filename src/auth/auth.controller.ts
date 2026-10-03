@@ -99,10 +99,9 @@ export class AuthController {
     description: 'No autorizado.',
   })
   @ApiBearerAuth()
+  @Get('profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN, Role.CAJERO, Role.CLIENTEWEB)
-  @Get('profile')
-  @UseGuards(LocalAuthGuard)
   getProfile(@CurrentUser() user: AuthUser) {
     return {
       id: user.userId,
