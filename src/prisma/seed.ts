@@ -49,7 +49,7 @@ async function main() {
   // USUARIOS
   // =====================================================
 
-  const password = await hash('Password123!', 10);
+  const password = await hash('12345678', 10);
 
   const admin = await prisma.user.create({
     data: {
@@ -64,9 +64,9 @@ async function main() {
 
   const cajero = await prisma.user.create({
     data: {
-      nombre: 'Carlos',
-      apellido: 'Cajero',
-      email: 'cajero@pos.com',
+      nombre: 'Mesly',
+      apellido: 'Flores',
+      email: 'mess@pos.com',
       password,
       role: 'CAJERO',
       direccion: 'Ciudad de México',
