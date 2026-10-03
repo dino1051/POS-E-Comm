@@ -9,6 +9,9 @@ export class WebhooksController {
   @Post('mockpay')
   @HttpCode(HttpStatus.OK)
   async recibirMockPay(@Body() body: MockPayWebhookDto) {
+    console.log('🔥🔥🔥 WEBHOOK MOCKPAY RECIBIDO');
+    console.log('🔥 BODY:', body);
+
     return this.ventasWebService.procesarWebhook(body);
   }
 }
