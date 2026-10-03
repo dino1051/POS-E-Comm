@@ -17,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CategoriasModule } from './categorias/categorias.module.js';
 import { PosModule } from './pos/pos.module.js';
 import { SesionesCajaModule } from './sesiones-caja/sesiones-caja.module.js';
+import { WebhookModule } from './webhook/webhook.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -37,6 +38,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     CategoriasModule,
     PosModule,
     SesionesCajaModule,
+    WebhookModule,
   ],
 
   controllers: [AppController],
