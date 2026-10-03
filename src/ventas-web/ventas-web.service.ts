@@ -7,6 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateVentaWebDto } from './dto/create-ventaweb.dto.js';
+import { MockPayWebhookDto } from '../webhook/dto/webhook.dto.js';
 
 @Injectable()
 export class VentasWebService {
@@ -131,5 +132,77 @@ export class VentasWebService {
     }
 
     return pago;
+  }
+
+  async procesarWebhook(body: MockPayWebhookDto) {
+    const ventaId = Number(body.metadata.order_id);
+
+    if (!Number.isInteger(ventaId)) {
+      throw new BadRequestException('order_id inválido');
+    }
+
+    const venta = await this.prisma.ventasWeb.findUnique({
+      where: {
+        id: ventaId,
+      },
+    });
+
+    if (!venta) {
+      throw new NotFoundException(`No existe la venta ${ventaId}`);
+    }
+
+    if (venta.id_pago_externo && venta.id_pago_externo !== body.id) {
+      throw new BadRequestException('La transacción no corresponde a la venta');
+    }
+
+    if (Number(venta.total) !== body.amount) {
+      throw new BadRequestException(
+        'El monto del pago no coincide con el total de la venta',
+      );
+    }
+
+    if (body.currency !== 'USD') {
+      throw new BadRequestException('Moneda de pago no válida');
+    }
+
+    if (body.event === 'payment.succeeded') {
+      await this.prisma.ventasWeb.update({
+        where: {
+          id: ventaId,
+        },
+        data: {
+          estado_pago: 'PAGADO',
+          id_pago_externo: body.id,
+        },
+      });
+
+      return {
+        received: true,
+        status: 'PAGADO',
+        venta_id: ventaId,
+      };
+    }
+
+    if (body.event === 'payment.failed') {
+      await this.prisma.ventasWeb.update({
+        where: {
+          id: ventaId,
+        },
+        data: {
+          estado_pago: 'RECHAZADO',
+          id_pago_externo: body.id,
+        },
+      });
+
+      return {
+        received: true,
+        status: 'RECHAZADO',
+        venta_id: ventaId,
+      };
+    }
+
+    return {
+      received: true,
+    };
   }
 }
