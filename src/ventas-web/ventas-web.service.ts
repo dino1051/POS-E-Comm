@@ -106,17 +106,25 @@ export class VentasWebService {
       signal: AbortSignal.timeout(10000),
     });
 
+    const responseText = await response.text();
+
+    console.log('🔥 MOCKPAY STATUS:', response.status);
+    console.log('🔥 MOCKPAY STATUS TEXT:', response.statusText);
+    console.log('🔥 MOCKPAY BODY:', responseText);
+
     if (!response.ok) {
-      const errorBody = await response.text();
-
-      console.error('Error de MockPay:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorBody,
-      });
-
       throw new BadGatewayException(
         `MockPay respondió con HTTP ${response.status}`,
+      );
+    }
+
+    const data = JSON.parse(responseText);
+
+    if (!data.id || !data.checkout_url) {
+      console.log('🔥 RESPUESTA PARSEADA:', data);
+
+      throw new BadGatewayException(
+        'MockPay devolvió una respuesta incompleta',
       );
     }
 
