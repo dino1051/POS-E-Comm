@@ -4,10 +4,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
-import {
-  AbrirSesionCajaDto,
-  CerrarSesionCajaDto,
-} from './dto/create-sesion-caja.dto.js';
+import { AbrirSesionCajaDto } from './dto/create-sesion-caja.dto.js';
 
 @Injectable()
 export class SesionesCajaService {

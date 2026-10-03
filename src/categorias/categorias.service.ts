@@ -23,12 +23,17 @@ export class CategoriasService {
   }
 
   async findByQuery(nombre: string) {
-    return this.prisma.categorias.findMany({
+    return this.prisma.articulos.findMany({
       where: {
-        nombre: {
-          startsWith: nombre,
-          mode: 'insensitive',
+        categoria: {
+          nombre: {
+            startsWith: nombre,
+            mode: 'insensitive',
+          },
         },
+      },
+      include: {
+        categoria: true,
       },
     });
   }

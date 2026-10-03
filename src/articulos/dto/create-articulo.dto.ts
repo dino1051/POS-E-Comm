@@ -55,6 +55,10 @@ export class CreateArticuloDto {
   @IsPositive({ message: 'el precio a la compra debe ser un numero positivo' })
   @IsNotEmpty({ message: 'Se debe proporcionar un numero' })
   precioCompra: number;
+  @ApiProperty({
+    example: 4,
+    description: 'El id de la categoria del articulo a ser creado',
+  })
   @IsNotEmpty({ message: 'debes proporcionar el id de una categoria' })
   @IsInt({ message: 'el id de la categoria debe ser un entero' })
   @IsPositive({ message: 'el id de la categoria debe ser positivo' })

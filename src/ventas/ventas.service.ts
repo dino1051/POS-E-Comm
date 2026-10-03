@@ -131,7 +131,11 @@ export class VentasService {
             articulo: {
               select: {
                 nombre: true,
-                categoria: true,
+                categoria: {
+                  select: {
+                    nombre: true,
+                  },
+                },
               },
             },
           },
@@ -149,7 +153,11 @@ export class VentasService {
     return this.prisma.ventas.findMany({
       where: { id_usuario },
       include: {
-        usuario: true,
+        usuario: {
+          select: {
+            nombre: true,
+          },
+        },
       },
     });
   }

@@ -10,7 +10,7 @@ import {
 import { Role } from '../../generated/prisma/enums.js';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserDto {
+export class CreateClienteDto {
   @ApiProperty({
     example: 'Juan',
     description: 'El nombre del usuario a ser creado',
@@ -62,11 +62,4 @@ export class CreateUserDto {
   })
   @IsOptional()
   direccion?: string;
-  @ApiProperty({
-    example: 'ADMIN',
-    description: 'El ROL del usuario a ser creado',
-  })
-  @IsOptional()
-  @IsEnum(Role, { message: 'El rol debe ser ADMIN o CAJERO o CLIENTEWEB' })
-  role?: Role;
 }
