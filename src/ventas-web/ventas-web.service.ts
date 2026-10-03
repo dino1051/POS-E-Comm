@@ -118,28 +118,29 @@ export class VentasWebService {
       );
     }
 
-    const data = JSON.parse(responseText);
-
-    if (!data.id || !data.checkout_url) {
-      console.log('🔥 RESPUESTA PARSEADA:', data);
-
-      throw new BadGatewayException(
-        'MockPay devolvió una respuesta incompleta',
-      );
-    }
-
-    const pago: {
-      id: string;
+    let data: {
+      id_transaccion: string;
       checkout_url: string;
-    } = await response.json();
+    };
 
-    if (!pago.id || !pago.checkout_url) {
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      throw new BadGatewayException(
+        'MockPay devolvió una respuesta JSON inválida',
+      );
+    }
+
+    if (!data.id_transaccion || !data.checkout_url) {
       throw new BadGatewayException(
         'MockPay devolvió una respuesta incompleta',
       );
     }
 
-    return pago;
+    return {
+      id: data.id_transaccion,
+      checkout_url: data.checkout_url,
+    };
   }
 
   async procesarWebhook(body: MockPayWebhookDto) {
