@@ -12,7 +12,15 @@ async function bootstrap() {
 
   app.setGlobalPrefix(configService.get<string>('API_PREFIX') ?? 'api');
 
-  app.enableCors();
+  app.enableCors({
+    origin: [
+      'http://localhost:5173',
+      'http://127.0.0.1:5173',
+      'https://tu-frontend.vercel.app',
+    ],
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

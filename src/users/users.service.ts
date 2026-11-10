@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
@@ -41,6 +42,30 @@ export class UsersService {
     return this.prisma.user.findMany({
       orderBy: { id: 'asc' },
     });
+  }
+  async obtenerPerfil(userId: number) {
+    const usuario = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        nombre: true,
+        apellido: true,
+        email: true,
+        role: true,
+      },
+    });
+
+    if (!usuario) {
+      throw new UnauthorizedException('El usuario no existe');
+    }
+
+    return {
+      id: usuario.id,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      email: usuario.email,
+      rol: usuario.role,
+    };
   }
 
   async findOne(id: number) {

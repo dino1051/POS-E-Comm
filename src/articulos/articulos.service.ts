@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateArticuloDto } from './dto/create-articulo.dto.js';
@@ -23,24 +24,41 @@ export class ArticulosService {
   }
 
   async findByStock(Max: string) {
-    try {
-      const stockMax = Number(Max);
-      return await this.prisma.articulos.findMany({
-        where: {
-          stock: {
-            lte: stockMax,
+    const stockMax = Number(Max);
+
+    if (!Number.isInteger(stockMax) || stockMax < 0 || Max.trim() === '') {
+      throw new BadRequestException(
+        'El stock máximo debe ser un número entero no negativo',
+      );
+    }
+
+    return this.prisma.articulos.findMany({
+      where: {
+        stock: {
+          lte: stockMax,
+        },
+      },
+      select: {
+        id: true,
+        nombre: true,
+        stock: true,
+        precioVenta: true,
+        precioCompra: true,
+        categoria: {
+          select: {
+            id: true,
+            nombre: true,
           },
         },
-      });
-    } catch (error) {
-      return new ConflictException('Valor invalido!');
-    }
+      },
+      orderBy: { stock: 'asc' },
+    });
   }
 
   async createArticulo(createArticuloDto: CreateArticuloDto) {
     const existe = await this.findArticuloByName(createArticuloDto.nombre);
     if (existe) {
-      throw new ConflictException('Ya existe una categoria con ese nombre');
+      throw new ConflictException('Ya existe un artículo con ese nombre');
     }
     return await this.prisma.articulos.create({
       data: {
@@ -55,11 +73,20 @@ export class ArticulosService {
   }
 
   async findAllArticulos() {
-    return await this.prisma.articulos.findMany({
+    return this.prisma.articulos.findMany({
       select: {
         id: true,
         nombre: true,
+        descripcion: true,
         stock: true,
+        precioVenta: true,
+        id_categoria: true,
+        categoria: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
       },
       orderBy: { id: 'asc' },
     });
@@ -75,15 +102,50 @@ export class ArticulosService {
   async findOneArticulo(id: number) {
     const articulo = await this.prisma.articulos.findUnique({
       where: { id },
-      omit: {
+      select: {
         id: true,
+        nombre: true,
+        descripcion: true,
+        stock: true,
+        precioVenta: true,
         id_categoria: true,
+        creadoEn: true,
+        categoria: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
       },
     });
+
     if (!articulo) {
-      throw new NotFoundException(`articulo de ID: ${id} no encontrado`);
+      throw new NotFoundException(`Artículo de ID: ${id} no encontrado`);
     }
+
     return articulo;
+  }
+
+  async findAllAdmin() {
+    return this.prisma.articulos.findMany({
+      select: {
+        id: true,
+        nombre: true,
+        descripcion: true,
+        stock: true,
+        precioVenta: true,
+        precioCompra: true,
+        id_categoria: true,
+        creadoEn: true,
+        categoria: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
+      },
+      orderBy: { id: 'asc' },
+    });
   }
 
   async removeArticulo(id: number) {

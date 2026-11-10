@@ -29,10 +29,20 @@ export class AuthService {
       email: user.email,
       role: user.role,
     };
+
     return {
       access_token: this.jwtService.sign(payload),
+
+      usuario: {
+        id: user.id,
+        nombre: user.nombre,
+        apellido: user.apellido,
+        email: user.email,
+        rol: user.role,
+      },
     };
   }
+
   async register(createUserDto: CreateUserDto) {
     return await this.userService.create(createUserDto);
   }

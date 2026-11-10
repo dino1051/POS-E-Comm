@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   UseGuards,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ArticulosService } from './articulos.service.js';
 import { CreateArticuloDto } from './dto/create-articulo.dto.js';
@@ -84,6 +85,17 @@ export class ArticulosController {
     return this.articulosService.findAllArticulos();
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.ADMIN)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Lista todos los artículos para administración',
+  })
+  @Get('admin/todos')
+  findAllAdmin() {
+    return this.articulosService.findAllAdmin();
+  }
+
   @ApiOperation({
     summary: 'Lista un artículo por ID',
     description: 'Lista un artículo por su ID.',
@@ -93,8 +105,8 @@ export class ArticulosController {
     description: 'No encontrado.',
   })
   @Get(':id')
-  findOneArticulo(@Param('id') id: string) {
-    return this.articulosService.findOneArticulo(+id);
+  findOneArticulo(@Param('id', ParseIntPipe) id: number) {
+    return this.articulosService.findOneArticulo(id);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -122,10 +134,10 @@ export class ArticulosController {
   })
   @Patch(':id')
   updateArticulo(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateArticuloDto: UpdateArticuloDto,
   ) {
-    return this.articulosService.updateArticulo(+id, updateArticuloDto);
+    return this.articulosService.updateArticulo(id, updateArticuloDto);
   }
 
   @ApiBearerAuth()
@@ -147,8 +159,8 @@ export class ArticulosController {
     status: 404,
     description: 'ID de artículo no encontrado.',
   })
-  @Delete('id')
-  removeArticulo(@Param('id') id: string) {
-    return this.articulosService.removeArticulo(+id);
+  @Delete(':id')
+  removeArticulo(@Param('id', ParseIntPipe) id: number) {
+    return this.articulosService.removeArticulo(id);
   }
 }

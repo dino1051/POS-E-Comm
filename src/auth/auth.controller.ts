@@ -25,11 +25,16 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard.js';
 import { RolesGuard } from './guards/roles.guard.js';
 import { Role } from '../generated/prisma/enums.js';
 import { Roles } from './decorators/roles.decorator.js';
+import { UsersService } from '../users/users.service.js';
+import { User } from '../generated/prisma/client.js';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UsersService,
+  ) {}
 
   @UseGuards(LocalAuthGuard)
   @ApiOperation({ summary: 'Iniciar sesión' })
@@ -99,14 +104,10 @@ export class AuthController {
     description: 'No autorizado.',
   })
   @ApiBearerAuth()
-  @Get('profile')
+  @Get('me')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN, Role.CAJERO, Role.CLIENTEWEB)
   getProfile(@CurrentUser() user: AuthUser) {
-    return {
-      id: user.userId,
-      email: user.email,
-      role: user.role,
-    };
+    return this.userService.obtenerPerfil(user.userId);
   }
 }
