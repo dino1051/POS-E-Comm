@@ -196,4 +196,35 @@ export class SesionesCajaService {
       };
     });
   }
+
+  async obtenerSesionesAbiertas() {
+    return this.prisma.sesionCaja.findMany({
+      where: {
+        estado: 'ABIERTA',
+      },
+      select: {
+        id: true,
+        id_pos: true,
+        id_usuario_apertura: true,
+        fecha_apertura: true,
+        monto_inicial: true,
+        estado: true,
+        pos: {
+          select: {
+            numero: true,
+            nombre: true,
+          },
+        },
+        usuario: {
+          select: {
+            nombre: true,
+            apellido: true,
+          },
+        },
+      },
+      orderBy: {
+        fecha_apertura: 'desc',
+      },
+    });
+  }
 }

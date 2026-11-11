@@ -210,4 +210,39 @@ export class VentasWebService {
       received: true,
     };
   }
+
+  async resumenPedidos() {
+    const [pedidosPendientes, pedidosRecientes] = await Promise.all([
+      this.prisma.ventasWeb.count({
+        where: {
+          estadoweb: 'PENDIENTE',
+        },
+      }),
+
+      this.prisma.ventasWeb.findMany({
+        take: 5,
+        orderBy: {
+          fecha: 'desc',
+        },
+        select: {
+          id: true,
+          fecha: true,
+          total: true,
+          estadoweb: true,
+          estado_pago: true,
+          usuario: {
+            select: {
+              nombre: true,
+              apellido: true,
+            },
+          },
+        },
+      }),
+    ]);
+
+    return {
+      pedidosPendientes,
+      pedidosRecientes,
+    };
+  }
 }

@@ -147,7 +147,7 @@ export class VentasService {
     });
   }
   async findAllVentas() {
-    return this.prisma.ventas.findMany({ orderBy: { id: 'asc' } });
+    return this.prisma.ventas.findMany({ orderBy: { id: 'desc' } });
   }
   async findMisVentas(id_usuario: number) {
     return this.prisma.ventas.findMany({
@@ -377,6 +377,60 @@ export class VentasService {
         totalVendido: grupo._sum.total ?? 0,
       })),
       ventas,
+    };
+  }
+
+  async resumenDiario() {
+    const ahora = new Date();
+
+    const inicio = new Date(
+      ahora.getFullYear(),
+      ahora.getMonth(),
+      ahora.getDate(),
+    );
+
+    const fin = new Date(
+      ahora.getFullYear(),
+      ahora.getMonth(),
+      ahora.getDate() + 1,
+    );
+
+    const where = {
+      fecha: {
+        gte: inicio,
+        lt: fin,
+      },
+      estado: 'COMPLETADA' as const,
+    };
+
+    const resumen = await this.prisma.ventas.aggregate({
+      where,
+      _count: {
+        _all: true,
+      },
+      _sum: {
+        total: true,
+      },
+    });
+
+    const ventasRecientes = await this.prisma.ventas.findMany({
+      orderBy: {
+        fecha: 'desc',
+      },
+      take: 5,
+      select: {
+        id: true,
+        fecha: true,
+        total: true,
+        tipo_pago: true,
+        estado: true,
+      },
+    });
+
+    return {
+      cantidadVentas: resumen._count._all,
+      totalVendido: resumen._sum.total ?? 0,
+      ventasRecientes,
     };
   }
 }

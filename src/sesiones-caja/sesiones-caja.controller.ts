@@ -1,4 +1,4 @@
-import { Controller, UseGuards, Post, Param, Body } from '@nestjs/common';
+import { Controller, UseGuards, Post, Param, Body, Get } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { RolesGuard } from '../auth/guards/roles.guard.js';
 import { Roles } from '../auth/decorators/roles.decorator.js';
@@ -56,5 +56,13 @@ export class SesionesCajaController {
   @Post(':id/cerrar')
   cerrar(@Param('id') id: string) {
     return this.sesionesCajaService.cerrar(Number(id));
+  }
+
+  @ApiOperation({
+    summary: 'Obtener sesiones de caja abiertas',
+  })
+  @Get('abiertas')
+  obtenerSesionesAbiertas() {
+    return this.sesionesCajaService.obtenerSesionesAbiertas();
   }
 }

@@ -91,6 +91,15 @@ export class VentasController {
   }
 
   @ApiOperation({
+    summary: 'Resumen diario de ventas',
+  })
+  @Roles(Role.ADMIN)
+  @Get('resumen-diario')
+  resumenDiario() {
+    return this.ventasService.resumenDiario();
+  }
+
+  @ApiOperation({
     summary: 'Lista una venta',
     description: 'Lista una venta con su ID.',
   })
