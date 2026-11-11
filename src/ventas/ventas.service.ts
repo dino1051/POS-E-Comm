@@ -114,6 +114,7 @@ export class VentasService {
       return venta;
     });
   }
+
   async findVenta(id: number) {
     return this.prisma.ventas.findUnique({
       where: { id },
@@ -146,12 +147,17 @@ export class VentasService {
       },
     });
   }
+
   async findAllVentas() {
     return this.prisma.ventas.findMany({ orderBy: { id: 'desc' } });
   }
+
   async findMisVentas(id_usuario: number) {
     return this.prisma.ventas.findMany({
       where: { id_usuario },
+      orderBy: {
+        fecha: 'desc',
+      },
       include: {
         usuario: {
           select: {

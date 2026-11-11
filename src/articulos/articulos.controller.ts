@@ -71,7 +71,7 @@ export class ArticulosController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN)
   @ApiBearerAuth()
-  @Get('/stock')
+  @Get('stock-bajo')
   findByStock(@Query('Max') Max: string) {
     return this.articulosService.findByStock(Max);
   }
