@@ -1,10 +1,19 @@
-import { Controller, UseGuards, Post, Param, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  UseGuards,
+  Post,
+  Param,
+  Body,
+  Get,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 import { RolesGuard } from '../auth/guards/roles.guard.js';
 import { Roles } from '../auth/decorators/roles.decorator.js';
 import { Role } from '../generated/prisma/enums.js';
 import { AbrirSesionCajaDto } from './dto/create-sesion-caja.dto.js';
 import { SesionesCajaService } from './sesiones-caja.service.js';
+import { CerrarSesionCajaDto } from './dto/cerrar-sesion-caja.dto.js';
 import {
   ApiBearerAuth,
   ApiTags,
@@ -42,6 +51,15 @@ export class SesionesCajaController {
   }
 
   @ApiOperation({
+    summary: 'Obtiene el historial de sesiones de caja',
+  })
+  @Roles(Role.ADMIN)
+  @Get('historial')
+  obtenerHistorial() {
+    return this.sesionesCajaService.obtenerHistorial();
+  }
+
+  @ApiOperation({
     summary: 'Cerrar una sesión de caja',
     description: 'Cerrar una sesión de caja.',
   })
@@ -54,8 +72,11 @@ export class SesionesCajaController {
     description: 'No autorizado.',
   })
   @Post(':id/cerrar')
-  cerrar(@Param('id') id: string) {
-    return this.sesionesCajaService.cerrar(Number(id));
+  cerrar(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: CerrarSesionCajaDto,
+  ) {
+    return this.sesionesCajaService.cerrar(id, dto);
   }
 
   @ApiOperation({
@@ -64,5 +85,23 @@ export class SesionesCajaController {
   @Get('abiertas')
   obtenerSesionesAbiertas() {
     return this.sesionesCajaService.obtenerSesionesAbiertas();
+  }
+
+  @ApiOperation({
+    summary: 'Obtiene el resumen de una sesión de caja',
+  })
+  @Roles(Role.ADMIN)
+  @Get(':id/resumen')
+  obtenerResumen(@Param('id', ParseIntPipe) id: number) {
+    return this.sesionesCajaService.obtenerResumen(id);
+  }
+
+  @ApiOperation({
+    summary: 'Consulta el detalle de una sesión de caja',
+  })
+  @Roles(Role.ADMIN)
+  @Get(':id/detalle')
+  obtenerDetalle(@Param('id', ParseIntPipe) id: number) {
+    return this.sesionesCajaService.obtenerDetalle(id);
   }
 }

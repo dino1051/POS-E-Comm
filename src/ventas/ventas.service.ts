@@ -164,6 +164,19 @@ export class VentasService {
             nombre: true,
           },
         },
+        detallesVenta: {
+          select: {
+            id: true,
+            cantidadArticulos: true,
+            subtotal: true,
+            articulo: {
+              select: {
+                id: true,
+                nombre: true,
+              },
+            },
+          },
+        },
       },
     });
   }

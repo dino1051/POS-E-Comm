@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../prisma/prisma.service.js';
 import { CreateVentaWebDto } from './dto/create-ventaweb.dto.js';
 import { MockPayWebhookDto } from '../webhook/dto/webhook.dto.js';
+import { EstadoWeb } from '../generated/prisma/enums.js';
 
 @Injectable()
 export class VentasWebService {
@@ -188,20 +189,32 @@ export class VentasWebService {
       };
     }
 
-    if (body.event === 'payment.failed') {
-      await this.prisma.ventasWeb.update({
+    if (body.event === 'payment.succeeded') {
+      if (
+        venta.estado_pago === 'REEMBOLSADO' ||
+        venta.estadoweb === 'CANCELADO'
+      ) {
+        throw new BadRequestException(
+          'No se puede confirmar un pedido cancelado o reembolsado',
+        );
+      }
+
+      await this.prisma.ventasWeb.updateMany({
         where: {
           id: ventaId,
+          estado_pago: 'PENDIENTE',
+          estadoweb: 'PENDIENTE',
         },
         data: {
-          estado_pago: 'RECHAZADO',
+          estado_pago: 'PAGADO',
+          estadoweb: 'PAGADO',
           id_pago_externo: body.id,
         },
       });
 
       return {
         received: true,
-        status: 'RECHAZADO',
+        status: 'PAGADO',
         venta_id: ventaId,
       };
     }
@@ -244,5 +257,225 @@ export class VentasWebService {
       pedidosPendientes,
       pedidosRecientes,
     };
+  }
+
+  async obtenerTodas() {
+    return this.prisma.ventasWeb.findMany({
+      select: {
+        id: true,
+        fecha: true,
+        total: true,
+        estadoweb: true,
+        estado_pago: true,
+        estado: true,
+        id_pago_externo: true,
+
+        usuario: {
+          select: {
+            id: true,
+            nombre: true,
+            apellido: true,
+            email: true,
+          },
+        },
+
+        _count: {
+          select: {
+            detallesventaweb: true,
+          },
+        },
+      },
+
+      orderBy: {
+        fecha: 'desc',
+      },
+    });
+  }
+
+  async obtenerPorId(id: number) {
+    const venta = await this.prisma.ventasWeb.findUnique({
+      where: { id },
+
+      include: {
+        usuario: {
+          select: {
+            id: true,
+            nombre: true,
+            apellido: true,
+            email: true,
+          },
+        },
+
+        detallesventaweb: {
+          select: {
+            id: true,
+            cantidadArticulos: true,
+            cantidadDevuelta: true,
+            subtotal: true,
+
+            articulo: {
+              select: {
+                id: true,
+                nombre: true,
+                precioVenta: true,
+              },
+            },
+          },
+        },
+
+        devolucion: true,
+      },
+    });
+
+    if (!venta) {
+      throw new NotFoundException(`La venta web ${id} no existe`);
+    }
+
+    return venta;
+  }
+
+  async actualizarEstado(id: number, nuevoEstado: EstadoWeb) {
+    if (
+      nuevoEstado !== EstadoWeb.EN_CAMINO &&
+      nuevoEstado !== EstadoWeb.ENTREGADO
+    ) {
+      throw new BadRequestException(
+        'Este endpoint solo permite enviar o entregar pedidos',
+      );
+    }
+
+    const venta = await this.prisma.ventasWeb.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        estadoweb: true,
+        estado_pago: true,
+      },
+    });
+
+    if (!venta) {
+      throw new NotFoundException(`La venta web ${id} no existe`);
+    }
+
+    if (venta.estado_pago !== 'PAGADO') {
+      throw new BadRequestException('El pedido debe tener el pago confirmado');
+    }
+
+    const transicionValida =
+      (venta.estadoweb === EstadoWeb.PAGADO &&
+        nuevoEstado === EstadoWeb.EN_CAMINO) ||
+      (venta.estadoweb === EstadoWeb.EN_CAMINO &&
+        nuevoEstado === EstadoWeb.ENTREGADO);
+
+    if (!transicionValida) {
+      throw new BadRequestException(
+        `No se permite cambiar de ${venta.estadoweb} a ${nuevoEstado}`,
+      );
+    }
+
+    // Actualización condicional para impedir que dos solicitudes
+    // avancen simultáneamente desde el mismo estado.
+    const resultado = await this.prisma.ventasWeb.updateMany({
+      where: {
+        id,
+        estadoweb: venta.estadoweb,
+        estado_pago: 'PAGADO',
+      },
+      data: {
+        estadoweb: nuevoEstado,
+      },
+    });
+
+    if (resultado.count === 0) {
+      throw new BadRequestException(
+        'El pedido cambió de estado. Actualiza e inténtalo de nuevo.',
+      );
+    }
+
+    return this.prisma.ventasWeb.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        fecha: true,
+        estadoweb: true,
+        estado_pago: true,
+      },
+    });
+  }
+
+  async obtenerMisPedidos(userId: number) {
+    return this.prisma.ventasWeb.findMany({
+      where: {
+        id_usuario: userId,
+      },
+
+      select: {
+        id: true,
+        fecha: true,
+        total: true,
+        estadoweb: true,
+        estado_pago: true,
+        estado: true,
+
+        detallesventaweb: {
+          select: {
+            id: true,
+            cantidadArticulos: true,
+            subtotal: true,
+
+            articulo: {
+              select: {
+                id: true,
+                nombre: true,
+              },
+            },
+          },
+        },
+      },
+
+      orderBy: {
+        fecha: 'desc',
+      },
+    });
+  }
+
+  async obtenerMiPedidoPorId(id: number, userId: number) {
+    const pedido = await this.prisma.ventasWeb.findFirst({
+      where: {
+        id,
+        id_usuario: userId,
+      },
+
+      select: {
+        id: true,
+        fecha: true,
+        total: true,
+        estadoweb: true,
+        estado_pago: true,
+        estado: true,
+
+        detallesventaweb: {
+          select: {
+            id: true,
+            cantidadArticulos: true,
+            cantidadDevuelta: true,
+            subtotal: true,
+
+            articulo: {
+              select: {
+                id: true,
+                nombre: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!pedido) {
+      throw new NotFoundException(`No se encontró el pedido ${id}`);
+    }
+
+    return pedido;
   }
 }
